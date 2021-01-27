@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: service-jyzt-es
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:121.196.50.221}:${REGISTER_PORT:8848}
+        namespace: jyzt-cloud-staging
+
+      config:
+        server-addr: ${REGISTER_HOST:121.196.50.221}:${REGISTER_PORT:8848}
+        namespace: jyzt-cloud-staging
+        file-extension: yml
+        group: JYZT-CLOUD

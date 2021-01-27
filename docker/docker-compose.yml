@@ -1,0 +1,76 @@
+version: '3'
+services:
+  nacos-app:
+    image: jy/server-jyzt-nacos
+    container_name: nacos-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8761:8761
+
+  nc-app:
+    image: jy/server-jyzt-nc
+    container_name: nc-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8765:8765
+
+  consumer-app:
+    image: jy/server-jyzt-consumer
+    container_name: consumer-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8767:8767
+
+  es-app:
+    image: jy/server-jyzt-es
+    container_name: es-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8769:8769
+  shop-app:
+    image: jy/server-jyzt-shop
+    container_name: shop-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8771:8771
+
+  zuul-app:
+    image: jy/server-jyzt-zuul
+    container_name: zuul-app
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - sc-net
+    ports:
+      - 8763:8763
+
+networks:
+  sc-net:
+    external: false
