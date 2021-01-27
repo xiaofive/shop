@@ -11,8 +11,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.jyzt</groupId>
-    <artifactId>jyzt-cloud</artifactId>
+    <groupId>com.wms</groupId>
+    <artifactId>smart-wms</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -30,14 +30,12 @@
     </properties>
 
     <modules>
-        <module>server-jyzt-nacos</module>
-        <module>server-jyzt-zuul</module>
-        <module>server-jyzt-nc</module>
-        <module>server-jyzt-consumer</module>
-        <module>server-jyzt-es</module>
-        <module>server-jyzt-shop</module>
-        <module>server-jyzt-common</module>
-        <module>server-jyzt-nc-bean</module>
+        <module>server-wms-nacos</module>
+        <module>server-wms-zuul</module>
+        <module>server-wms-consumer</module>
+        <module>server-wms-es</module>
+        <module>server-wms-common</module>
+
     </modules>
 
     <!-- 通用 -->

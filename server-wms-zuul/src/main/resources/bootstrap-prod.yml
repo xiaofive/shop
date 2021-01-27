@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: service-wms-zuul
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: smart-wms-prod
+        ip: 121.196.50.221
+
+      config:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: smart-wms-prod
+        file-extension: yml
+        group: SMART-WMS

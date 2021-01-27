@@ -1,7 +1,7 @@
 version: '3'
 services:
   nacos-app:
-    image: jy/server-jyzt-nacos
+    image: smart-wms/server-wms-nacos
     container_name: nacos-app
     restart: always
     volumes:
@@ -12,20 +12,8 @@ services:
     ports:
       - 8761:8761
 
-  nc-app:
-    image: jy/server-jyzt-nc
-    container_name: nc-app
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-    networks:
-      - sc-net
-    ports:
-      - 8765:8765
-
   consumer-app:
-    image: jy/server-jyzt-consumer
+    image: smart-wms/server-wms-consumer
     container_name: consumer-app
     restart: always
     volumes:
@@ -37,7 +25,7 @@ services:
       - 8767:8767
 
   es-app:
-    image: jy/server-jyzt-es
+    image: smart-wms/server-wms-es
     container_name: es-app
     restart: always
     volumes:
@@ -47,20 +35,9 @@ services:
       - sc-net
     ports:
       - 8769:8769
-  shop-app:
-    image: jy/server-jyzt-shop
-    container_name: shop-app
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-    networks:
-      - sc-net
-    ports:
-      - 8771:8771
 
   zuul-app:
-    image: jy/server-jyzt-zuul
+    image: smart-wms/server-wms-zuul
     container_name: zuul-app
     restart: always
     volumes:

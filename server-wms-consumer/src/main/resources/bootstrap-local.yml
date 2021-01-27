@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: service-wms-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: smart-wms-local
+
+      config:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: smart-wms-local
+        file-extension: yml
+        group: SMART-WMS
