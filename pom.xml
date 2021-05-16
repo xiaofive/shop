@@ -11,8 +11,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.wms</groupId>
-    <artifactId>smart-wms</artifactId>
+    <groupId>com.shop</groupId>
+    <artifactId>shop</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -30,12 +30,8 @@
     </properties>
 
     <modules>
-        <module>server-wms-nacos</module>
-        <module>server-wms-zuul</module>
-        <module>server-wms-consumer</module>
-        <module>server-wms-es</module>
-        <module>server-wms-common</module>
-
+        <module>shop-common</module>
+        <module>shop-product</module>
     </modules>
 
     <!-- 通用 -->
@@ -52,15 +48,8 @@
 
             <!-- common模块 -->
             <dependency>
-                <groupId>com.jyzt</groupId>
-                <artifactId>server-jyzt-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <!-- nc-bean模块 -->
-            <dependency>
-                <groupId>com.jyzt</groupId>
-                <artifactId>server-jyzt-nc-bean</artifactId>
+                <groupId>com.shop</groupId>
+                <artifactId>shop-common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

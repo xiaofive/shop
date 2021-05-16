@@ -1,31 +1,7 @@
 version: '3'
 services:
-  nacos-app:
-    image: smart-wms/server-wms-nacos
-    container_name: nacos-app
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-    networks:
-      - sc-net
-    ports:
-      - 8761:8761
-
-  consumer-app:
-    image: smart-wms/server-wms-consumer
-    container_name: consumer-app
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-    networks:
-      - sc-net
-    ports:
-      - 8767:8767
-
   es-app:
-    image: smart-wms/server-wms-es
+    image: shop/shop-product
     container_name: es-app
     restart: always
     volumes:
@@ -35,18 +11,6 @@ services:
       - sc-net
     ports:
       - 8769:8769
-
-  zuul-app:
-    image: smart-wms/server-wms-zuul
-    container_name: zuul-app
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-    networks:
-      - sc-net
-    ports:
-      - 8763:8763
 
 networks:
   sc-net:

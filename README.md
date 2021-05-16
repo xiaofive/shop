@@ -1,1 +1,1 @@
-基于spring-cloud的分布式智能仓储物流管理系统
+基于spring-cloud的分布式商城系统
