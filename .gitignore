@@ -30,6 +30,7 @@ build/
 .vscode/
 .DS_Store
 
+
 logs/
 ../logs/
 *.log
