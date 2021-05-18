@@ -31,7 +31,7 @@ build/
 .DS_Store
 
 ###config
-bootstrap-dev.yml
+
 
 logs/
 ../logs/
