@@ -4,11 +4,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        server-addr: ${REGISTER_HOST:1.116.205.169}:${REGISTER_PORT:8848}
         namespace: shop-product-local
 
       config:
-        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        server-addr: ${REGISTER_HOST:1.116.205.169}:${REGISTER_PORT:8848}
         namespace: shop-product-local
         file-extension: yml
         group: SHOP
