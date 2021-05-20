@@ -1,20 +1,20 @@
-package com.shop.common.bean;
+package com.shop.product.bean;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by ThomasYu on 2019-07-21
+ * Java Bean规范顶级类
+ *
+ * Author: wang Y
+ * Date: 2021-05-20
  */
-@Getter
-@Setter
-public class BaseReadOnlyEntity implements Serializable {
+@Data
+public class BaseReadOnlyEntity {
 
     private static final long serialVersionUID = 7050795514815769409L;
 
@@ -24,4 +24,5 @@ public class BaseReadOnlyEntity implements Serializable {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;
+
 }

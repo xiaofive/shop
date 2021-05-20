@@ -21,18 +21,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>6.4.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>6.4.0</version>
-        </dependency>
-
         <!-- 业务无关 -->
         <!--注册中心-->
         <dependency>
@@ -46,28 +34,22 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
-        <!-- 熔断器 -->
+        <!-- Mysql -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!-- sleuth -->
+        <!-- Druid数据源 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- zipkin -->
+        <!-- MyBatis-Plus -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
-        </dependency>
-
-        <!-- Feign客户端调用 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
         <dependency>

@@ -30,8 +30,6 @@ build/
 .vscode/
 .DS_Store
 
-###config
-bootstrap-local.yml
 
 logs/
 ../logs/

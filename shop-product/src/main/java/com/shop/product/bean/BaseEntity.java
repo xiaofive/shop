@@ -1,17 +1,13 @@
-package com.shop.common.bean;
+package com.shop.product.bean;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
-import lombok.Getter;
+import lombok.Data;
 import lombok.Setter;
 
 import java.util.Date;
 
-/**
- * Created by ThomasYu on 2019-07-21
- */
-@Getter
-@Setter
+@Data
 public class BaseEntity extends BaseReadOnlyEntity {
 
     private Date updated;
