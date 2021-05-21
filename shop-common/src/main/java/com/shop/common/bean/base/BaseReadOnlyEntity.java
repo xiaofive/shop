@@ -1,4 +1,4 @@
-package com.shop.product.bean;
+package com.shop.common.bean.base;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * Java Bean规范顶级类
+ * read bean
  *
  * Author: wang Y
  * Date: 2021-05-20

@@ -1,6 +1,6 @@
 package com.shop.product.bean.entity;
 
-import com.shop.product.bean.BaseEntity;
+import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
 
 @Data
