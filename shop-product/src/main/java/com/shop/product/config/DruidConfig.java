@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * Date: 2021-05-20
  */
 @Configuration
-public class Druid {
+public class DruidConfig {
 
 
     /**

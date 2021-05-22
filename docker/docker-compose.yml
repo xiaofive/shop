@@ -2,7 +2,7 @@ version: '3'
 services:
   es-app:
     image: shop/shop-product
-    container_name: es-app
+    container_name: product-app
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -10,7 +10,7 @@ services:
     networks:
       - sc-net
     ports:
-      - 8769:8769
+      - 8888:8888
 
 networks:
   sc-net:

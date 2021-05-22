@@ -20,9 +20,9 @@ esac
 echo '==================2.拉取最新代码==============================='
 git pull
 echo '==================3.清理当前脚本启动的容器和产生的镜像=========='
-docker stop zuul-app consumer-app nc-app nacos-app shop-app es-app
-docker rm zuul-app consumer-app nc-app nacos-app shop-app es-app
-docker image rm smart-wms/server-jyzt-zuul smart-wms/server-jyzt-consumer smart-wms/server-jyzt-nc smart-wms/server-jyzt-nacos smart-wms/server-jyzt-shop smart-wms/server-jyzt-es
+docker stop product-app
+docker rm product-app
+docker image shop/shop-product
 
 echo '==================4.maven打包,构建服务image====================='
 mvn clean
