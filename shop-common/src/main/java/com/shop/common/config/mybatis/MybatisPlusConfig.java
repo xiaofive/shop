@@ -1,7 +1,7 @@
 package com.shop.common.config.mybatis;
 
-import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +33,7 @@ public class MybatisPlusConfig {
     }
 
     /**
+     * 插件：按需参考官方文档添加：https://mp.baomidou.com/guide/
      * 一：乐观锁配置 OptimisticLockerInnerInterceptor
      * 使用时，在实体类的字段上加上 @Version 注解
      * <p>
@@ -59,9 +60,12 @@ public class MybatisPlusConfig {
      * 更新时，带上这个version
      * 执行更新时， set version = newVersion where version = oldVersion
      * 如果version不对，就更新失败
-     *
+     * <p>
      * 二：分页配置 PaginationInnerInterceptor
      * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false 避免缓存出现问题
+     * <p>
+     * 三：防止全表更新与删除插件 BlockAttackInnerInterceptor
+     * TODO：Mybatis-Plus3.4的漏洞：与逻辑删除字段共用的时候拦截失效的问题
      *
      * @Param:
      * @return:
@@ -72,6 +76,7 @@ public class MybatisPlusConfig {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor()); //分页
         interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor()); //启用乐观锁
+        interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor()); // 添加防止全表更新与删除插件
         return interceptor;
     }
 

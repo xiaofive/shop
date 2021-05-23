@@ -1,6 +1,7 @@
 package com.shop.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shop.common.util.BeanConvertUtils;
@@ -59,5 +60,17 @@ public class UserServiceImpl implements UserService {
         userMapper.insert(user);
     }
 
+    @Override
+    public void deleteAllTable() {
+        //测试全表删除
+        userMapper.delete(null);
+    }
+
+    @Override
+    public void updateAllTable() {
+        //测试全表更新
+        LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<User>().set(User::getName, "005");
+        userMapper.update(null, updateWrapper);
+    }
 
 }

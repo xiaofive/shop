@@ -94,7 +94,7 @@ public class UserRest {
     }
 
     /**
-     * 测试
+     * 测试 done
      * Mybatis-Plus
      * 自动填充字段值
      *
@@ -105,6 +105,32 @@ public class UserRest {
     @PostMapping
     public void testInsert(@Valid @RequestBody UserReq userReq) {
         userService.testInsert(userReq);
+    }
+
+    /**
+     * 测试全表删除 done
+     * Mybatis-Plus3.4的漏洞：与逻辑删除字段共用的时候拦截失效的问题
+     *
+     * @Param:
+     * @return:
+     * @Date: 2021-05-23
+     */
+    @GetMapping("allTableDelete")
+    public void allTableDelete() {
+        userService.deleteAllTable();
+    }
+
+    /**
+     * 测试全表更新 done
+     * Mybatis-Plus3.4的漏洞：与逻辑删除字段共用的时候拦截失效的问题
+     *
+     * @Param:
+     * @return:
+     * @Date: 2021-05-23
+     */
+    @GetMapping("allTableUpdate")
+    public void allTableUpdate() {
+        userService.updateAllTable();
     }
 
 }

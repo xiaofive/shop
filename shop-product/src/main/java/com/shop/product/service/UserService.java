@@ -16,4 +16,9 @@ public interface UserService {
     void testDelete(Long id);
 
     void testInsert(UserReq userReq);
+
+    void deleteAllTable();
+
+    void updateAllTable();
+
 }
