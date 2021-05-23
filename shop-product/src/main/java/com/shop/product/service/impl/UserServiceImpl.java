@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void testInsert(UserReq userReq) {
         User user = BeanConvertUtils.map(userReq, User.class);
-        user.setRefId(UUID.randomUUID().toString());
         userMapper.insert(user);
     }
 

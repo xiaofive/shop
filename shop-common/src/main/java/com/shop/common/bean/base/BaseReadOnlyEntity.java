@@ -1,6 +1,5 @@
 package com.shop.common.bean.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -11,7 +10,7 @@ import java.util.Date;
 
 /**
  * read bean
- *
+ * <p>
  * Author: wang Y
  * Date: 2021-05-20
  */
@@ -24,6 +23,9 @@ public class BaseReadOnlyEntity implements Serializable {
     @TableId
     private Long id;
 
+    /**
+     * db自动填充
+     */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;

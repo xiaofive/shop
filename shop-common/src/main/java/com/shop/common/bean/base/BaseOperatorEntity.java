@@ -10,4 +10,9 @@ import lombok.Data;
  */
 @Data
 public class BaseOperatorEntity extends BaseEntity {
+
+    private String createdBy;
+
+    private String updatedBy;
+
 }

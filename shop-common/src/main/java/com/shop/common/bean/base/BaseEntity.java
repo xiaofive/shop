@@ -1,7 +1,5 @@
 package com.shop.common.bean.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
@@ -16,10 +14,11 @@ import java.util.Date;
  * Date: 2021-05-21
  */
 @Data
-public class BaseEntity extends BaseReadOnlyEntity {
+public class BaseEntity extends BaseAutoFillEntity {
 
-    private String refId;
-
+    /**
+     * db自动填充
+     */
     private Date updated;
 
     /**
