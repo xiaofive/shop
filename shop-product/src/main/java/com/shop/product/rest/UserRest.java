@@ -1,5 +1,6 @@
 package com.shop.product.rest;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shop.product.bean.entity.User;
 import com.shop.product.bean.req.UserReq;
@@ -16,6 +17,10 @@ import javax.validation.Valid;
  * Lombok
  * 集成测试
  * <p>
+ * <p>
+ * TODO: 1.自定义SQL注入器,selectByRefId
+ * TODO: 2.分页
+ * <p>
  * Author: wang Y
  * Date: 2021-05-20
  */
@@ -30,7 +35,7 @@ public class UserRest {
      * 测试 done
      * validations
      * Mybatis-Plus
-     * 分页 //TODO
+     * 分页
      * Swagger-ui
      * 数据源配置
      * lombok
@@ -39,10 +44,12 @@ public class UserRest {
      * @return:
      * @Date: 2021-05-23
      */
-    @PostMapping("page")
-    public Page<User> testPage(@Valid @RequestBody UserReq userReq) {
-        Page page = new Page(1, 2);
-        return userService.testSelect(page, 1L);
+    @GetMapping("page")
+    public IPage<User> testPage(@RequestParam(value = "current", defaultValue = "1") Long current,
+                                @RequestParam(value = "size", defaultValue = "15") Long size,
+                                @RequestParam(required = false) String name) {
+        Page page = new Page(current, size);
+        return userService.testPage(page, name);
     }
 
     /**
