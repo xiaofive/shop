@@ -1,10 +1,12 @@
 package com.shop.common.bean.base;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,10 +16,11 @@ import java.util.Date;
  * Date: 2021-05-20
  */
 @Data
-public class BaseReadOnlyEntity {
+public class BaseReadOnlyEntity implements Serializable {
 
     private static final long serialVersionUID = 7050795514815769409L;
 
+    //@TableId(type = IdType.ASSIGN_ID) //TODO 待ID方案完善
     @TableId
     private Long id;
 

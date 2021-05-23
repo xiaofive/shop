@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 /**
  * Druid Config
+ * Druid版本：1.1.22
+ * <p>
  * Author: wang Y
  * Date: 2021-05-20
  */

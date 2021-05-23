@@ -1,4 +1,4 @@
-package com.shop.common.config;
+package com.shop.common.swagger;
 
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -8,10 +8,6 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +15,7 @@ import java.util.List;
 /**
  * Swagger顶级配置，各子模块Swagger-ui配置需要继承该类，
  * 配合 com.shop.common.config.SwaggerProperties该自定义参数类使用
+ * 版本：2.9.2
  *
  * Author: wang Y
  * Date: 2021-05-22

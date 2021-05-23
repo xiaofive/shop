@@ -47,7 +47,7 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- common模块 -->
+            <!-- Saas商城公共模块 -->
             <dependency>
                 <groupId>com.shop</groupId>
                 <artifactId>shop-common</artifactId>
@@ -91,6 +91,20 @@
                 <version>1.18.20</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Orika -->
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>1.5.4</version>
+            </dependency>
+
+            <!-- Mybatis-Plus SQL日志打印 -->
+<!--            <dependency>-->
+<!--                <groupId>p6spy</groupId>-->
+<!--                <artifactId>p6spy</artifactId>-->
+<!--                <version>3.9.1</version>-->
+<!--            </dependency>-->
 
             <!-- #######################################Swagger API文档 ############################### -->
             <!-- swagger2依赖 -->

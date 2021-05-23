@@ -13,7 +13,7 @@
     <artifactId>shop-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>shop-common</name>
-    <description>common for Spring Boot</description>
+    <description>Saas商城公共模块</description>
 
     <dependencies>
 
@@ -22,7 +22,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- MyBatis-Plus JavaBean顶级抽象类定义在common模块 -->
+        <!-- MyBatis-Plus JavaBean顶级抽象类,BaseMapper定义在common模块 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -39,6 +39,13 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <!-- orika -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.5.4</version>
         </dependency>
 
     </dependencies>

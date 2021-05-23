@@ -19,5 +19,6 @@ public class UserReq {
     @NotEmpty(message = "not_empty")
     private String name;
     private Integer age;
+    private String email;
 
 }

@@ -1,4 +1,4 @@
-package com.shop.common.config;
+package com.shop.common.swagger;
 
 import lombok.Builder;
 import lombok.Data;

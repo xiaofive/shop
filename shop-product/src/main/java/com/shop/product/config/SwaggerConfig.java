@@ -1,7 +1,7 @@
 package com.shop.product.config;
 
-import com.shop.common.config.BaseSwaggerConfig;
-import com.shop.common.config.SwaggerProperties;
+import com.shop.common.swagger.BaseSwaggerConfig;
+import com.shop.common.swagger.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

@@ -13,13 +13,19 @@
     <artifactId>shop-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>shop-product</name>
-    <description>电商-商品中心</description>
+    <description>Saas商城-商品中心</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+
+        <!-- 引入商城公共模块 -->
+        <dependency>
+            <groupId>com.shop</groupId>
+            <artifactId>shop-common</artifactId>
+        </dependency>
 
         <!-- 业务无关 -->
         <!--注册中心-->
@@ -47,10 +53,10 @@
         </dependency>
 
         <!-- MyBatis-Plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--        </dependency>-->
 
         <!-- Swagger2-ui -->
         <dependency>
@@ -62,6 +68,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <!-- Mybatis-Plus SQL日志打印 -->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
         </dependency>
 
         <dependency>
@@ -88,11 +100,6 @@
             <version>Hoxton.SR3</version>
             <type>pom</type>
             <scope>import</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.shop</groupId>
-            <artifactId>shop-common</artifactId>
         </dependency>
 
     </dependencies>
