@@ -1,4 +1,4 @@
-package com.shop.product.bean.req;
+package com.shop.product.example.bean.req;
 
 import lombok.Data;
 

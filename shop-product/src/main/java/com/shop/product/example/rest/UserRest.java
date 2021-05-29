@@ -1,10 +1,10 @@
-package com.shop.product.rest;
+package com.shop.product.example.rest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shop.product.bean.entity.User;
-import com.shop.product.bean.req.UserReq;
-import com.shop.product.service.UserService;
+import com.shop.product.example.bean.entity.User;
+import com.shop.product.example.bean.req.UserReq;
+import com.shop.product.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

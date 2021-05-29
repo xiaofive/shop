@@ -1,9 +1,9 @@
-package com.shop.product.service;
+package com.shop.product.example.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shop.product.bean.entity.User;
-import com.shop.product.bean.req.UserReq;
+import com.shop.product.example.bean.entity.User;
+import com.shop.product.example.bean.req.UserReq;
 
 public interface UserService {
 

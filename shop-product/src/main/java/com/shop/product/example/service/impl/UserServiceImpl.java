@@ -1,14 +1,14 @@
-package com.shop.product.service.impl;
+package com.shop.product.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shop.common.util.BeanConvertUtils;
-import com.shop.product.bean.entity.User;
-import com.shop.product.bean.req.UserReq;
-import com.shop.product.mapper.UserMapper;
-import com.shop.product.service.UserService;
+import com.shop.product.example.bean.entity.User;
+import com.shop.product.example.bean.req.UserReq;
+import com.shop.product.example.mapper.UserMapper;
+import com.shop.product.example.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
