@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: shop-redis-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-redis-client-staging
+
+      config:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-redis-client-staging
+        file-extension: yml
+        group: SHOP

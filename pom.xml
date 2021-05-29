@@ -31,6 +31,7 @@
 
     <modules>
         <module>shop-common</module>
+        <module>redis-cluster-client</module>
         <module>shop-product</module>
     </modules>
 
@@ -118,6 +119,20 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>2.9.2</version>
+            </dependency>
+
+            <!-- ####################################### 缓存 ############################### -->
+            <!--spring boot 2.0以后默认使用lettuce-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.4.5</version>
+            </dependency>
+            <!-- 配置Lettuce连接池使用 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.9.0</version>
             </dependency>
 
             <!-- hutool工具包 -->
