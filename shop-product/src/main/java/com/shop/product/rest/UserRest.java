@@ -18,8 +18,6 @@ import javax.validation.Valid;
  * 集成测试
  * <p>
  * <p>
- * TODO: 1.自定义SQL注入器,selectByRefId
- * TODO: 2.分页
  * <p>
  * Author: wang Y
  * Date: 2021-05-20
