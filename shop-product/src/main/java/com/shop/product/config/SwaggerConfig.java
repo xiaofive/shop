@@ -19,9 +19,9 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.shop.product.example.rest")    //扫描生成API文档的包路径
+                .apiBasePackage("com.shop.product")    //扫描生成API文档的包路径
                 .title("商品中心")
-                .description("商品中心后台相关接口文档")
+                .description("商品中心后台管理&移动端相关接口文档")
                 .contactName("shop-product")
                 .version("1.0")
                 .enableSecurity(false) //TODO 未实现会员中心，暂无需登陆

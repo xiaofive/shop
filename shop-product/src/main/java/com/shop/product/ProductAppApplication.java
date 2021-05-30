@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
         }
 )
 @MapperScan(basePackages = {  //mapper文件扫描，按需添加
-        "com.shop.product.example.mapper"
+        "com.shop.product.example.mapper",
+        "com.shop.product.category.mapper"
 })
 @EnableDiscoveryClient
 @RestController
