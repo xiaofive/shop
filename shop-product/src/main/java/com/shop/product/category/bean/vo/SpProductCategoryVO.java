@@ -13,7 +13,7 @@ public class SpProductCategoryVO {
     private Long parentId;
     private String name;
     private Integer level;
-    private Integer productCount;
+    private Integer productNum;
     private String productUnit;
     private Integer navStatus;
     private Integer enable;

@@ -24,7 +24,7 @@ public class SpProductCategoryReq {
     private Integer level;
 
     @NotNull(message = "not_empty")
-    private Integer productCount;
+    private Integer productNum;
 
     @NotEmpty(message = "not_empty")
     private String productUnit;
