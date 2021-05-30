@@ -1,1 +1,3 @@
-基于spring-cloud的分布式商城系统
+Saas分布式商城系统
+main分支用来集成基础框架
+product分支用来开发商品中心相关
