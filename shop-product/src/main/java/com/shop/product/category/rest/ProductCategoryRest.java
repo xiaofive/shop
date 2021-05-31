@@ -143,7 +143,7 @@ public class ProductCategoryRest {
      * @Date: 2021-05-30
      */
     @ApiOperation("根据id获取商品分类")
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/getById")
     public SpProductCategory getById(@RequestParam("id") Long id) {
         return spProductCategoryService.getById(id);
     }
