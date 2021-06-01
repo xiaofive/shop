@@ -1,7 +1,7 @@
-package com.shop.product.sproduct.rest;
+package com.shop.product.product.rest;
 
-import com.shop.product.sproduct.bean.req.SpProductAddReq;
-import com.shop.product.sproduct.service.SpProductService;
+import com.shop.product.product.bean.req.SpProductAddReq;
+import com.shop.product.product.service.SpProductService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

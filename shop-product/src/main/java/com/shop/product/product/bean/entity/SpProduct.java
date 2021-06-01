@@ -1,4 +1,4 @@
-package com.shop.product.sproduct.bean.entity;
+package com.shop.product.product.bean.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

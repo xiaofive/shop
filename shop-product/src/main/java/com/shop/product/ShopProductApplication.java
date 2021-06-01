@@ -27,14 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 @MapperScan(basePackages = {  //mapper文件扫描，按需添加
         "com.shop.product.example.mapper",
         "com.shop.product.category.mapper",
-        "com.shop.product.brand.mapper"
+        "com.shop.product.brand.mapper",
+        "com.shop.product.product.mapper"
 })
 @EnableDiscoveryClient
 @RestController
-public class ProductAppApplication {
+public class ShopProductApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductAppApplication.class, args);
+        SpringApplication.run(ShopProductApplication.class, args);
     }
 
 
