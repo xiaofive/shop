@@ -33,6 +33,7 @@
         <module>shop-common</module>
         <module>redis-cluster-client</module>
         <module>shop-product</module>
+        <module>shop-wms</module>
     </modules>
 
     <!-- 通用 -->
