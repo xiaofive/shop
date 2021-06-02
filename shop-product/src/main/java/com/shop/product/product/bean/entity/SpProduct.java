@@ -17,14 +17,14 @@ public class SpProduct {
 
     private Long brandId;
     private Long productCategoryId;
-    private Long feightTemplateId;
+    private Long fareTemplateId;
     private Long productAttributeCategoryId;
     private String name;
     private String picture;
     private String itemNo;
-    private Integer selfStatus;
-    private Integer newStatus;
-    private Integer recommandStatus;
+    private Boolean isSelf;
+    private Boolean isNew;
+    private Boolean isRecommand;
     private Integer approveStatus;
     private Integer sort;
     private BigDecimal saleNum;
@@ -38,9 +38,9 @@ public class SpProduct {
     private BigDecimal tagPrice;
     private BigDecimal stock;
     private BigDecimal warnStock;
-    private String unit;//TODO 待拆分出单位表 VARCHAR (16) COMMENT '单位',
+    private String unit;//TODO 待拆分出单位表  '单位',
     private BigDecimal weight;
-    private Integer previewStatus;
+    private Boolean isPreview;
     private String serviceIds;
     private String keywords;
     private String commit;
