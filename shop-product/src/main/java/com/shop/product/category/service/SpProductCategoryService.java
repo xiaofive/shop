@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.shop.product.category.bean.entity.SpProductCategory;
 import com.shop.product.category.bean.req.SpProductCategoryReq;
-import com.shop.product.category.bean.vo.SpProductCategoryAndChildVO;
+import com.shop.product.category.bean.vo.SpProductCategoryAllTreeVO;
 import com.shop.product.category.bean.vo.SpProductCategoryVO;
 
 import java.util.List;
@@ -37,41 +37,40 @@ public interface SpProductCategoryService extends IService<SpProductCategory> {
     /**
      * 批量删除
      *
-     * @param ids
+     * @param idList
      * @return: void
      * @Date: 2021-05-30
      */
-    void deleteBatch(List<Long> ids);
+    void deleteBatch(List<Long> idList);
 
     /**
      * 修改分类
      *
-     * @param id
      * @param spProductCategoryReq
      * @return: void
      * @Date: 2021-05-30
      */
-    void update(Long id, SpProductCategoryReq spProductCategoryReq);
+    void updateById(SpProductCategoryReq spProductCategoryReq);
 
     /**
      * 导航栏显示设置
      *
-     * @param ids
-     * @param navStatus
+     * @param idList
+     * @param isNav
      * @return: void
      * @Date: 2021-05-30
      */
-    void updateShowStatus(List<Long> ids, Integer navStatus);
+    void updateShowStatus(List<Long> idList, Boolean isNav);
 
     /**
      * 是否启用
      *
-     * @param ids
+     * @param idList
      * @param enable
      * @return: void
      * @Date: 2021-05-30
      */
-    void updateEnable(List<Long> ids, Boolean enable);
+    void updateEnable(List<Long> idList, Boolean enable);
 
     /**
      * 分页
@@ -93,15 +92,15 @@ public interface SpProductCategoryService extends IService<SpProductCategory> {
      * @return: com.shop.product.category.bean.entity.SpProductCategory
      * @Date: 2021-05-30
      */
-    SpProductCategory getById(Long id);
+    SpProductCategoryVO getById(Long id);
 
     /**
-     * 从根节点向下遍历获取所有分类数据
+     * 分类树，从根节点开始向下遍历
      *
      * @return: java.util.List<com.shop.product.category.bean.vo.SpProductCategoryAndChildVO>
      * @Date: 2021-05-30
      */
-    List<SpProductCategoryAndChildVO> listAll();
+    List<SpProductCategoryAllTreeVO> listWithTree();
 
 
 }

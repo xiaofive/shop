@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SpProductCategoryReq {
 
+    private Long id; //用于修改
+
     @NotNull(message = "not_empty")
     private Long parentId;
 
@@ -30,7 +32,7 @@ public class SpProductCategoryReq {
     private String productUnit;
 
     @NotNull(message = "not_empty")
-    private Integer navStatus;
+    private Boolean isNav;
 
     @NotNull(message = "not_empty")
     private Integer enable;

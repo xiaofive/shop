@@ -15,7 +15,7 @@ public class SpProductCategoryVO {
     private Integer level;
     private Integer productNum;
     private String productUnit;
-    private Integer navStatus;
+    private Boolean isNav;
     private Integer enable;
     private Integer sort;
     private String icon;

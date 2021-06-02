@@ -1,11 +1,11 @@
 package com.shop.product.category.rest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.shop.product.category.bean.entity.SpProductCategory;
 import com.shop.product.category.bean.req.SpProductCategoryReq;
-import com.shop.product.category.bean.vo.SpProductCategoryAndChildVO;
+import com.shop.product.category.bean.vo.SpProductCategoryAllTreeVO;
 import com.shop.product.category.bean.vo.SpProductCategoryVO;
 import com.shop.product.category.service.SpProductCategoryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,12 @@ import java.util.List;
  * 商品类目后台管理Rest
  * 建议类目层级设置不要过深
  * 本系统为三层 大分类 -> 中分类 ->小分类
+ * TODO 乐观锁
+ * TODO 修改指定字段
  * Author: wang Y
  * Date: 2021-05-30
  */
+@Api(tags = "商品分类")
 @RequestMapping("/rest/product/category")
 @RestController
 public class ProductCategoryRest {
@@ -60,58 +63,59 @@ public class ProductCategoryRest {
     /**
      * 批量删除
      *
-     * @param ids
+     * @param idList
      * @return: void
      * @Date: 2021-05-30
      */
     @ApiOperation("删除商品分类")
     @DeleteMapping(value = "/deleteBatch")
-    public void deleteBatch(@RequestParam("ids") List<Long> ids) {
-        spProductCategoryService.deleteBatch(ids);
+    public void deleteBatch(@RequestParam("idList") List<Long> idList) {
+        spProductCategoryService.deleteBatch(idList);
     }
 
     /**
      * 修改分类
      *
-     * @param id
      * @param spProductCategoryReq
      * @return: void
      * @Date: 2021-05-30
      */
     @ApiOperation("修改商品分类")
     @PutMapping(value = "/update/{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody SpProductCategoryReq spProductCategoryReq) {
-        spProductCategoryService.update(id, spProductCategoryReq);
+    public void update(@Valid @RequestBody SpProductCategoryReq spProductCategoryReq) {
+        if (spProductCategoryReq.getId() == null)
+            throw new RuntimeException("id不能为null");
+        spProductCategoryService.updateById(spProductCategoryReq);
     }
 
     /**
      * 导航栏显示设置
      *
-     * @param ids
-     * @param navStatus
+     * @param idList
+     * @param isNav
      * @return: void
      * @Date: 2021-05-30
      */
     @ApiOperation("导航栏显示状态")
-    @PutMapping(value = "/update/navStatus")
-    public void updateShowStatus(@RequestParam("ids") List<Long> ids,
-                                @RequestParam("navStatus") Integer navStatus) {
-        spProductCategoryService.updateShowStatus(ids, navStatus);
+    @PutMapping(value = "/update/isNav")
+    public void updateShowStatus(@RequestParam("idList") List<Long> idList,
+                                 @RequestParam("isNav") Boolean isNav) {
+        spProductCategoryService.updateShowStatus(idList, isNav);
     }
 
     /**
      * 是否启用
      *
-     * @param ids
+     * @param idList
      * @param enable
      * @return: void
      * @Date: 2021-05-30
      */
     @ApiOperation("类目是否启用")
     @PutMapping(value = "/update/enable")
-    public void updateEnable(@RequestParam("ids") List<Long> ids,
+    public void updateEnable(@RequestParam("idList") List<Long> idList,
                              @RequestParam("enable") Boolean enable) {
-        spProductCategoryService.updateEnable(ids, enable);
+        spProductCategoryService.updateEnable(idList, enable);
     }
 
     /**
@@ -144,20 +148,20 @@ public class ProductCategoryRest {
      */
     @ApiOperation("根据id获取商品分类")
     @GetMapping(value = "/getById")
-    public SpProductCategory getById(@RequestParam("id") Long id) {
+    public SpProductCategoryVO getById(@RequestParam("id") Long id) {
         return spProductCategoryService.getById(id);
     }
 
     /**
-     * 从根节点向下遍历获取所有分类数据
+     * 分类树，从根节点开始向下遍历
      *
      * @return: java.util.List<com.shop.product.category.bean.vo.SpProductCategoryAndChildVO>
      * @Date: 2021-05-30
      */
-    @ApiOperation("当前分类及其向下遍历所有子分类,无参从根节点开始")
-    @GetMapping(value = "/listAll")
-    public List<SpProductCategoryAndChildVO> listAll() {
-        return spProductCategoryService.listAll();
+    @ApiOperation("分类树")
+    @GetMapping(value = "/tree")
+    public List<SpProductCategoryAllTreeVO> listWithTree() {
+        return spProductCategoryService.listWithTree();
     }
 
 }

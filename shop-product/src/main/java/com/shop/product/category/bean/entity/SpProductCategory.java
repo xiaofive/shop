@@ -1,5 +1,6 @@
 package com.shop.product.category.bean.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -18,11 +19,12 @@ public class SpProductCategory extends BaseEntity {
     private Integer level;
     private Integer productNum;
     private String productUnit;
-    private Integer navStatus;
+    private Boolean isNav;
     private Integer enable;
     private Integer sort;
     private String icon;
     private String keywords;
+    @TableField(value = "`desc`")
     private String desc;
 
 }
