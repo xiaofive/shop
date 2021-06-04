@@ -17,8 +17,7 @@ import java.util.List;
  * 商品类目后台管理Rest
  * 建议类目层级设置不要过深
  * 本系统为三层 大分类 -> 中分类 ->小分类
- * TODO 乐观锁
- * TODO 修改指定字段
+ * TODO 批量更新优化 乐观锁
  * Author: wang Y
  * Date: 2021-05-30
  */
@@ -85,6 +84,9 @@ public class ProductCategoryRest {
     public void update(@Valid @RequestBody SpProductCategoryReq spProductCategoryReq) {
         if (spProductCategoryReq.getId() == null)
             throw new RuntimeException("id不能为null");
+        if (spProductCategoryReq.getParentId() < 0) {
+            throw new RuntimeException("父类不合法");
+        }
         spProductCategoryService.updateById(spProductCategoryReq);
     }
 

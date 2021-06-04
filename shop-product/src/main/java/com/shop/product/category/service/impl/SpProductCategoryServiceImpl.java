@@ -48,15 +48,25 @@ public class SpProductCategoryServiceImpl extends ServiceImpl<SpProductCategoryM
 
     @Override
     public void updateShowStatus(List<Long> idList, Boolean isNav) {
-        UpdateWrapper<SpProductCategory> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.in("id", idList);
+        QueryWrapper<SpProductCategory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", idList);
+        List<SpProductCategory> olds = spProductCategoryMapper.selectList(queryWrapper);
+        olds.stream().forEach(old -> {
+            old.setEnable(isNav);
+            spProductCategoryMapper.updateById(old);
+        });
 
-        spProductCategoryMapper.
     }
 
     @Override
     public void updateEnable(List<Long> idList, Boolean enable) {
-
+        QueryWrapper<SpProductCategory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", idList);
+        List<SpProductCategory> olds = spProductCategoryMapper.selectList(queryWrapper);
+        olds.stream().forEach(old -> {
+            old.setEnable(enable);
+            spProductCategoryMapper.updateById(old);
+        });
     }
 
     @Override
