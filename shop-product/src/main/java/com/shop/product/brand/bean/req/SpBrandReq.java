@@ -26,8 +26,8 @@ public class SpBrandReq {
     @NotNull(message = "not_empty")
     private Integer sort;
 
-    @NotEmpty(message = "not_empty")
-    private String isBrandManufacturer;
+    @NotNull(message = "not_empty")
+    private Boolean isBrandManufacturer;
 
     @NotNull(message = "not_empty")
     private Boolean enable;

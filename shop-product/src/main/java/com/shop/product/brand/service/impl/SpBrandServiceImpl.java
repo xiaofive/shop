@@ -46,13 +46,25 @@ public class SpBrandServiceImpl extends ServiceImpl<SpBrandMapper, SpBrand> impl
     }
 
     @Override
-    public void updateBatchIsBrandManufacturerStatus(List<Long> idList, Integer isBrandManufacturer) {
-
+    public void updateBatchIsBrandManufacturerStatus(List<Long> idList, Boolean isBrandManufacturer) {
+        QueryWrapper<SpBrand> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", idList);
+        List<SpBrand> olds = spBrandMapper.selectList(queryWrapper);
+        olds.stream().forEach(old -> {
+            old.setIsBrandManufacturer(isBrandManufacturer);
+            spBrandMapper.updateById(old);
+        });
     }
 
     @Override
     public void updateBatchEnable(List<Long> idList, Boolean enable) {
-
+        QueryWrapper<SpBrand> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", idList);
+        List<SpBrand> olds = spBrandMapper.selectList(queryWrapper);
+        olds.stream().forEach(old -> {
+            old.setEnable(enable);
+            spBrandMapper.updateById(old);
+        });
     }
 
     @Override

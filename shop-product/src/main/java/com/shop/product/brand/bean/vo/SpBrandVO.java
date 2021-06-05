@@ -15,7 +15,7 @@ public class SpBrandVO {
     private String name;
     private String firstLetter;
     private Integer sort;
-    private String isBrandManufacturer;
+    private Boolean isBrandManufacturer;
     private Boolean enable;
     private Integer productNum;
     private Integer productCommentNum;

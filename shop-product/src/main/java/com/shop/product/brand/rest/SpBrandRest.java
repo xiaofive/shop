@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shop.product.brand.bean.req.SpBrandReq;
 import com.shop.product.brand.bean.vo.SpBrandVO;
 import com.shop.product.brand.service.SpBrandService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +17,13 @@ import java.util.List;
  * Author: wang Y
  * Date: 2021-05-31
  */
+@Api(tags = "商品品牌")
 @RequestMapping("/rest/brand")
 @RestController
 public class SpBrandRest {
 
     @Resource
     private SpBrandService spBrandService;
-
 
     /**
      * 新增品牌
@@ -82,6 +83,7 @@ public class SpBrandRest {
         if (spBrandReq.getId() == null)
             throw new RuntimeException("id不能为null");
         spBrandService.update(spBrandReq);
+
     }
 
 
@@ -96,7 +98,7 @@ public class SpBrandRest {
      */
     @ApiOperation(value = "批量更新厂家制造商状态")
     @PutMapping(value = "/update/isBrandManufacturer")
-    public void updateBatchIsBrandManufacturerStatus(@RequestParam("idList") List<Long> idList, @RequestParam("isBrandManufacturer") Integer isBrandManufacturer) {
+    public void updateBatchIsBrandManufacturerStatus(@RequestParam("idList") List<Long> idList, @RequestParam("isBrandManufacturer") Boolean isBrandManufacturer) {
         spBrandService.updateBatchIsBrandManufacturerStatus(idList, isBrandManufacturer);
     }
 
@@ -106,7 +108,6 @@ public class SpBrandRest {
      *
      * @param idList
      * @param enable
-     * @Param:
      * @return: void
      * @Date: 2021-05-31
      */

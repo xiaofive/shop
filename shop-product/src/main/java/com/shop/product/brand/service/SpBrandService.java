@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.shop.product.brand.bean.entity.SpBrand;
 import com.shop.product.brand.bean.req.SpBrandReq;
 import com.shop.product.brand.bean.vo.SpBrandVO;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.util.List;
 
 public interface SpBrandService extends IService<SpBrand> {
@@ -21,7 +18,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void create(@Valid @RequestBody SpBrandReq spBrandReq);
+    void create(SpBrandReq spBrandReq);
 
     /**
      * 根据ID删除品牌
@@ -30,7 +27,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void deleteById(@RequestParam("id") Long id);
+    void deleteById(Long id);
 
     /**
      * 根据ID批量删除品牌
@@ -39,7 +36,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void deleteBatch(@RequestParam("idList") List<Long> idList);
+    void deleteBatch(List<Long> idList);
 
     /**
      * 根据ID更新品牌
@@ -48,7 +45,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void update(@Valid @RequestBody SpBrandReq spBrandReq);
+    void update(SpBrandReq spBrandReq);
 
     /**
      * 根据ID批量更新厂家制造商状态
@@ -58,8 +55,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void updateBatchIsBrandManufacturerStatus(@RequestParam("idList") List<Long> idList,
-                                              @RequestParam("isBrandManufacturer") Integer isBrandManufacturer);
+    void updateBatchIsBrandManufacturerStatus(List<Long> idList, Boolean isBrandManufacturer);
 
     /**
      * 根据ID批量启用禁用
@@ -69,7 +65,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: void
      * @Date: 2021-05-31
      */
-    void updateBatchEnable(@RequestParam("idList") List<Long> idList, @RequestParam("enable") Boolean enable);
+    void updateBatchEnable(List<Long> idList, Boolean enable);
 
     /**
      * 分页
@@ -80,9 +76,9 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.shop.product.brand.bean.vo.SpBrandVO>
      * @Date: 2021-05-31
      */
-    IPage<SpBrandVO> page(@RequestParam(value = "current", defaultValue = "1") Long current,
-                          @RequestParam(value = "size", defaultValue = "15") Long size,
-                          @RequestParam(value = "keyword", required = false) String keyword);
+    IPage<SpBrandVO> page(Long current,
+                          Long size,
+                          String keyword);
 
     /**
      * 根据ID查询品牌信息
@@ -91,7 +87,7 @@ public interface SpBrandService extends IService<SpBrand> {
      * @return: com.shop.product.brand.bean.vo.SpBrandVO
      * @Date: 2021-05-31
      */
-    SpBrandVO getById(@RequestParam("id") Long id);
+    SpBrandVO getById(Long id);
 
     /**
      * 获取全部品牌数据
