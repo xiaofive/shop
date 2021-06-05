@@ -26,11 +26,11 @@ public interface SpProductAttributeService extends IService<SpProductAttribute> 
     /**
      * 批量删除商品属性
      *
-     * @param ids
+     * @param idList
      * @return: void
      * @Date: 2021-05-31
      */
-    void deleteBatch(List<Long> ids);
+    void deleteBatch(List<Long> idList);
 
     /**
      * 修改商品属性

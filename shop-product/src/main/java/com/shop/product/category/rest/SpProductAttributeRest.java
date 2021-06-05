@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shop.product.category.bean.req.SpProductAttributeReq;
 import com.shop.product.category.bean.vo.SpProductAttributeVO;
 import com.shop.product.category.service.SpProductAttributeService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -14,10 +15,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 属性管理Rest
+ * 商品属性管理Rest
  * Author: wang Y
  * Date: 2021-05-31
  */
+@Api(tags = "商品属性")
 @RestController
 @RequestMapping("/rest/productAttribute")
 public class SpProductAttributeRest {
@@ -81,9 +83,11 @@ public class SpProductAttributeRest {
     @ApiImplicitParams({@ApiImplicitParam(name = "type", value = "0表示属性，1表示参数", required = true, paramType = "query", dataType = "integer")})
     @GetMapping(value = "/page")
     public IPage<SpProductAttributeVO> page(@RequestParam("cid") Long cid,
-                                            @RequestParam("type") Integer type,
+                                            @RequestParam("type") Integer type, //0,1
                                             @RequestParam(value = "current", defaultValue = "1") Long current,
                                             @RequestParam(value = "size", defaultValue = "15") Long size) {
+        if(type != 0 && type != 1)
+            throw new RuntimeException("类型只能为0:属性，1：参数");
         IPage<SpProductAttributeVO> iPage = spProductAttributeService.page(cid, type, current, size);
         return iPage;
     }

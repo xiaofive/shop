@@ -20,9 +20,15 @@ public class SpProductAttributeReq {
      */
     private Long id;
 
+    /**
+     * 关联商品属性分类ID
+     */
     @NotNull(message = "not_empty")
     private Long productAttributeCategoryId;
 
+    /**
+     * 属性名称
+     */
     @NotEmpty(message = "not_empty")
     private String name;
 
@@ -44,12 +50,21 @@ public class SpProductAttributeReq {
     @NotNull(message = "not_empty")
     private Integer searchType;
 
+    /**
+     * 具有相同属性Product是否关联
+     */
     @NotNull(message = "not_empty")
     private Boolean isBind;
 
+    /**
+     * 是否支持手动新增
+     */
     @NotNull(message = "not_empty")
     private Boolean isHandAdd;
 
+    /**
+     * 属性类型
+     */
     @NotNull(message = "not_empty")
     private Integer type;
 
