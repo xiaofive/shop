@@ -35,17 +35,16 @@ public interface SpProductAttributeCategoryService extends IService<SpProductAtt
      * @return: void
      * @Date: 2021-05-30
      */
-    void deleteBatch(List<Long> ids);
+    void deleteBatch(List<Long> idList);
 
     /**
-     * 修改商品属性分类
+     * 修改商品属性分类名称
      *
-     * @param id
-     * @param name
-     * @return: CommonResult
-     * @Date: 2021-05-30
+     * @param spProductAttributeCategoryReq
+     * @return: void
+     * @Date: 2021-06-05
      */
-    void updateById(Long id, String name);
+    void updateById(SpProductAttributeCategoryReq spProductAttributeCategoryReq);
 
     /**
      * 分页

@@ -14,6 +14,8 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class SpProductAttributeCategoryReq {
 
+    private Long id;
+
     @NotEmpty(message = "not_empty")
     private String name;
 

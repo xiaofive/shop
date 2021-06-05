@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shop.product.example.bean.entity.User;
 import com.shop.product.example.bean.req.UserReq;
 import com.shop.product.example.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import javax.validation.Valid;
  * Author: wang Y
  * Date: 2021-05-20
  */
+@Api(tags = "测试")
 @RequestMapping("/rest/user")
 @RestController
 public class UserRest {

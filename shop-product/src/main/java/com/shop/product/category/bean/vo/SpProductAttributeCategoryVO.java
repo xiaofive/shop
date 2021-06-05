@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 public class SpProductAttributeCategoryVO {
 
     private String name;
-    private String attributeCount;
-    private Integer param_count;
+    private Integer attributeNum;
+    private Integer paramNum;
 
 }

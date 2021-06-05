@@ -23,6 +23,8 @@ public class SpProductAttributeCategoryServiceImpl extends ServiceImpl<SpProduct
     @Override
     public void create(SpProductAttributeCategoryReq spProductAttributeCategoryReq) {
         SpProductAttributeCategory spProductAttributeCategory = BeanConvertUtils.map(spProductAttributeCategoryReq, SpProductAttributeCategory.class);
+        //属性 参数统计初始化
+        spProductAttributeCategory.setAttributeNum(0).setParamNum(0);
         spProductAttributeCategoryMapper.insert(spProductAttributeCategory);
     }
 
@@ -32,13 +34,15 @@ public class SpProductAttributeCategoryServiceImpl extends ServiceImpl<SpProduct
     }
 
     @Override
-    public void deleteBatch(List<Long> ids) {
-        ids.forEach(this::deleteById);
+    public void deleteBatch(List<Long> idList) {
+        idList.forEach(this::deleteById);
     }
 
     @Override
-    public void updateById(Long id, String name) {
-
+    public void updateById(SpProductAttributeCategoryReq spProductAttributeCategoryReq) {
+        SpProductAttributeCategory old = spProductAttributeCategoryMapper.selectById(spProductAttributeCategoryReq.getId());
+        old.setName(spProductAttributeCategoryReq.getName());
+        spProductAttributeCategoryMapper.updateById(old);
     }
 
     @Override
