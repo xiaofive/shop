@@ -30,7 +30,7 @@ public class ShopMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("start insert fill ....");
+        log.info("start insert fill ....");                                   //TODO 自动填充字段待完善
         this.strictInsertFill(metaObject, "createdBy", String.class, "system_create"); // 起始版本 3.3.0(推荐使用)
         this.strictInsertFill(metaObject, "refId", String.class, UUID.randomUUID().toString()); // 起始版本 3.3.0(推荐使用)
     }

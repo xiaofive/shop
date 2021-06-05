@@ -1,5 +1,6 @@
 package com.shop.product.category.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -61,9 +62,12 @@ public class SpProductAttributeServiceImpl extends ServiceImpl<SpProductAttribut
     }
 
     @Override
-    public IPage<SpProductAttributeVO> page(Long cid, Integer type, Long current, Long size) {
+    public IPage<SpProductAttributeVO> page(Long productAttributeCategoryId, Integer type, Long current, Long size) {
         Page<SpProductAttribute> page = new Page<>(current, size);
-        IPage<SpProductAttribute> iPage = spProductAttributeMapper.selectPage(page, null);
+        QueryWrapper<SpProductAttribute> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_attribute_category_id", productAttributeCategoryId);
+        queryWrapper.eq("type", type);
+        IPage<SpProductAttribute> iPage = spProductAttributeMapper.selectPage(page, queryWrapper);
         return iPage.convert(b -> BeanConvertUtils.map(b, SpProductAttributeVO.class));
     }
 

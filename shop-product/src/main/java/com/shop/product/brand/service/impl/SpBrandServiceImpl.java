@@ -68,10 +68,10 @@ public class SpBrandServiceImpl extends ServiceImpl<SpBrandMapper, SpBrand> impl
     }
 
     @Override
-    public IPage<SpBrandVO> page(Long current, Long size, String keyword) {
+    public IPage<SpBrandVO> page(Long current, Long size, String brandName) {
         Page<SpBrand> page = new Page<>(current, size);
         QueryWrapper<SpBrand> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("keyword", keyword);
+        queryWrapper.like("name", brandName);
         IPage<SpBrand> iPage = spBrandMapper.selectPage(page, queryWrapper);
         return iPage.convert(b -> BeanConvertUtils.map(b, SpBrandVO.class));
     }
@@ -85,7 +85,7 @@ public class SpBrandServiceImpl extends ServiceImpl<SpBrandMapper, SpBrand> impl
 
     @Override
     public List<SpBrandVO> listAll() {
-        List<SpBrand> spBrands = spBrandMapper.listAllAvailable();
+        List<SpBrand> spBrands = spBrandMapper.selectList(null);
         if (CollectionUtil.isEmpty(spBrands))
             return Collections.emptyList();
         List<SpBrandVO> spBrandVOS = BeanConvertUtils.listMap(spBrands, SpBrandVO.class);

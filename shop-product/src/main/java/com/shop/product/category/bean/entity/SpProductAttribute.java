@@ -1,5 +1,6 @@
 package com.shop.product.category.bean.entity;
 
+import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,11 +11,11 @@ import lombok.experimental.Accessors;
  */
 @Accessors(chain = true)
 @Data
-public class SpProductAttribute {
+public class SpProductAttribute extends BaseEntity {
 
     private Long productAttributeCategoryId;
     private String name;
-    private String selectType;
+    private Integer selectType;
     private Integer inputType;
     private String inputList;
     private Integer sort;

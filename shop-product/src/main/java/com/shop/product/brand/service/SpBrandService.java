@@ -72,13 +72,13 @@ public interface SpBrandService extends IService<SpBrand> {
      *
      * @param current
      * @param size
-     * @param keyword
+     * @param brandName
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.shop.product.brand.bean.vo.SpBrandVO>
      * @Date: 2021-05-31
      */
     IPage<SpBrandVO> page(Long current,
                           Long size,
-                          String keyword);
+                          String brandName);
 
     /**
      * 根据ID查询品牌信息

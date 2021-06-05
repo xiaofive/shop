@@ -129,12 +129,12 @@ public class SpBrandRest {
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.shop.product.brand.bean.vo.SpBrandVO>
      * @Date: 2021-05-31
      */
-    @ApiOperation(value = "根据品牌名称分页获取品牌列表")
+    @ApiOperation(value = "根据品牌名称模糊分页获取品牌列表")
     @GetMapping(value = "/page")
     public IPage<SpBrandVO> page(@RequestParam(value = "current", defaultValue = "1") Long current,
                                  @RequestParam(value = "size", defaultValue = "15") Long size,
-                                 @RequestParam(value = "keyword", required = false) String keyword) {
-        return spBrandService.page(current, size, keyword);
+                                 @RequestParam(value = "brandName", required = false) String brandName) {
+        return spBrandService.page(current, size, brandName);
     }
 
     /**

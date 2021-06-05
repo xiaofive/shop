@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.shop.product.category.bean.entity.SpProductAttribute;
 import com.shop.product.category.bean.req.SpProductAttributeReq;
 import com.shop.product.category.bean.vo.SpProductAttributeVO;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -19,9 +17,7 @@ public interface SpProductAttributeService extends IService<SpProductAttribute> 
      * @return: void
      * @Date: 2021-05-31
      */
-    @ApiOperation("新增商品属性")
-    @PostMapping(value = "/create")
-    public void create(SpProductAttributeReq spProductAttributeReq);
+    void create(SpProductAttributeReq spProductAttributeReq);
 
     /**
      * 批量删除商品属性
@@ -51,7 +47,7 @@ public interface SpProductAttributeService extends IService<SpProductAttribute> 
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.shop.product.category.bean.vo.SpProductAttributeVO>
      * @Date: 2021-05-31
      */
-    IPage<SpProductAttributeVO> page(Long cid,
+    IPage<SpProductAttributeVO> page(Long productAttributeCategoryId,
                                      Integer type,
                                      Long current,
                                      Long size);

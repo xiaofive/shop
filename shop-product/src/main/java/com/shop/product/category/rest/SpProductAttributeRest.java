@@ -29,6 +29,8 @@ public class SpProductAttributeRest {
 
     /**
      * 新增商品属性
+     * 属性分类ID必须挂靠在已有商品属性分类上
+     * type必须选中的
      *
      * @param spProductAttributeReq
      * @return: void
@@ -80,15 +82,14 @@ public class SpProductAttributeRest {
      * @Date: 2021-05-31
      */
     @ApiOperation("根据分类查询属性列表或参数列表")
-    @ApiImplicitParams({@ApiImplicitParam(name = "type", value = "0表示属性，1表示参数", required = true, paramType = "query", dataType = "integer")})
     @GetMapping(value = "/page")
-    public IPage<SpProductAttributeVO> page(@RequestParam("cid") Long cid,
+    public IPage<SpProductAttributeVO> page(@RequestParam("productAttributeCategoryId") Long productAttributeCategoryId,
                                             @RequestParam("type") Integer type, //0,1
                                             @RequestParam(value = "current", defaultValue = "1") Long current,
                                             @RequestParam(value = "size", defaultValue = "15") Long size) {
-        if(type != 0 && type != 1)
+        if (type != 0 && type != 1)
             throw new RuntimeException("类型只能为0:属性，1：参数");
-        IPage<SpProductAttributeVO> iPage = spProductAttributeService.page(cid, type, current, size);
+        IPage<SpProductAttributeVO> iPage = spProductAttributeService.page(productAttributeCategoryId, type, current, size);
         return iPage;
     }
 

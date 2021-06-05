@@ -32,8 +32,8 @@ public class SpProductAttributeReq {
     @NotEmpty(message = "not_empty")
     private String name;
 
-    @NotEmpty(message = "not_empty")
-    private String selectType;
+    @NotNull(message = "not_empty")
+    private Integer selectType;
 
     @NotNull(message = "not_empty")
     private Integer inputType;

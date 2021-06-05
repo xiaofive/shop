@@ -15,7 +15,7 @@ public class SpProductAttributeVO {
 
     private Long productAttributeCategoryId;
     private String name;
-    private String selectType;
+    private Integer selectType;
     private Integer inputType;
     private String inputList;
     private Integer sort;
