@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shop.wms.stock.bean.SpSkuStockVO;
 import com.shop.wms.stock.bean.req.SpSkuStockReq;
 import com.shop.wms.stock.service.SpSkuStockService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * Author: wang Y
  * Date: 2021-06-01
  */
+@Api(tags = "库存管理")
 @RequestMapping("/rest/sku/stock")
 @RestController
 public class SpSkuStockRest {
@@ -75,7 +77,6 @@ public class SpSkuStockRest {
     @ApiOperation(value = "根据ID更新SKU")
     @PutMapping(value = "/updateById")
     public void update(@Valid @RequestBody SpSkuStockReq spSkuStockReq) {
-
         if (spSkuStockReq.getId() == null)
             throw new RuntimeException("id不能为null");
         spSkuStockService.update(spSkuStockReq);
