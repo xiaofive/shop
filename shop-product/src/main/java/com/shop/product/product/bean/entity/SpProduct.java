@@ -1,5 +1,6 @@
 package com.shop.product.product.bean.entity;
 
+import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 @Accessors(chain = true)
 @Data
-public class SpProduct {
+public class SpProduct extends BaseEntity {
 
     private Long brandId;
     private Long productCategoryId;

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shop.common.standard.DefaultSelectVO;
 import com.shop.common.util.BeanConvertUtils;
 import com.shop.product.category.bean.entity.SpProductCategory;
 import com.shop.product.category.bean.req.SpProductCategoryReq;
@@ -12,6 +13,7 @@ import com.shop.product.category.bean.vo.SpProductCategoryAllTreeVO;
 import com.shop.product.category.bean.vo.SpProductCategoryVO;
 import com.shop.product.category.mapper.SpProductCategoryMapper;
 import com.shop.product.category.service.SpProductCategoryService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -127,4 +129,12 @@ public class SpProductCategoryServiceImpl extends ServiceImpl<SpProductCategoryM
         return children;
     }
 
+    @Override
+    public List<DefaultSelectVO> select(String productAttributeCategoryName) {
+        if (StringUtils.isBlank(productAttributeCategoryName)){
+            Page<SpProductCategory> page = new Page<>();
+            IPage<SpProductCategory> spProductCategories = spProductCategoryMapper.selectPage(page,null);
+        }
+        return null;
+    }
 }

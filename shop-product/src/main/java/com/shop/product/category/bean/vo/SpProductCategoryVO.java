@@ -1,5 +1,6 @@
 package com.shop.product.category.bean.vo;
 
+import com.shop.common.standard.SPSelectorVORule;
 import lombok.Data;
 
 /**
@@ -8,8 +9,9 @@ import lombok.Data;
  * Date: 2021-05-30
  */
 @Data
-public class SpProductCategoryVO {
+public class SpProductCategoryVO implements SPSelectorVORule {
 
+    private String refId;
     private Long parentId;
     private String name;
     private Integer level;
@@ -22,4 +24,23 @@ public class SpProductCategoryVO {
     private String keywords;
     private String desc;
 
+    @Override
+    public Object getFkey() {
+        return name;
+    }
+
+    @Override
+    public Object getFvalue() {
+        return refId;
+    }
+
+    @Override
+    public Object getFtext() {
+        return null;
+    }
+
+    @Override
+    public Object getRefId() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.shop.product.category.rest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.shop.common.standard.DefaultSelectVO;
 import com.shop.product.category.bean.req.SpProductCategoryReq;
 import com.shop.product.category.bean.vo.SpProductCategoryAllTreeVO;
 import com.shop.product.category.bean.vo.SpProductCategoryVO;
@@ -164,6 +165,18 @@ public class ProductCategoryRest {
     @GetMapping(value = "/tree")
     public List<SpProductCategoryAllTreeVO> listWithTree() {
         return spProductCategoryService.listWithTree();
+    }
+
+    /**
+     * 属性分类模糊下拉框
+     *
+     * @param productAttributeCategoryName
+     * @return: java.util.List<com.shop.common.standard.DefaultSelectVO>
+     * @Date: 2021-06-05
+     */
+    public List<DefaultSelectVO> select(@RequestParam(value = "productAttributeCategoryName", required = false) String productAttributeCategoryName) {
+        spProductCategoryService.select(productAttributeCategoryName);
+        return null;
     }
 
 }

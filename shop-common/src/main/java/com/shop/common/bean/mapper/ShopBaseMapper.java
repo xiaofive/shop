@@ -1,6 +1,7 @@
 package com.shop.common.bean.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.shop.common.bean.base.BaseEntity;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Author: wang Y
  * Date: 2021-05-22
  */
-public interface ShopBaseMapper<T> extends BaseMapper<T> {
+public interface ShopBaseMapper<T extends BaseEntity> extends BaseMapper<T> {
 
     /**
      * 根据 refId 查询,根据本系统建表规范，每张表会有refId字段，核心数据避免直接根据ID进行查询

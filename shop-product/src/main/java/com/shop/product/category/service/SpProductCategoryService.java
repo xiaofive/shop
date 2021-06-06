@@ -2,6 +2,7 @@ package com.shop.product.category.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.shop.common.standard.DefaultSelectVO;
 import com.shop.product.category.bean.entity.SpProductCategory;
 import com.shop.product.category.bean.req.SpProductCategoryReq;
 import com.shop.product.category.bean.vo.SpProductCategoryAllTreeVO;
@@ -102,5 +103,13 @@ public interface SpProductCategoryService extends IService<SpProductCategory> {
      */
     List<SpProductCategoryAllTreeVO> listWithTree();
 
+    /**
+     * 属性分类模糊下拉框
+     *
+     * @param productAttributeCategoryName
+     * @return: java.util.List<com.shop.common.standard.DefaultSelectVO>
+     * @Date: 2021-06-05
+     */
+    List<DefaultSelectVO> select(String productAttributeCategoryName);
 
 }
