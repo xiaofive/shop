@@ -33,8 +33,12 @@
         <module>shop-common</module>
         <module>redis-cluster-client</module>
         <module>shop-product</module>
+<<<<<<< HEAD
         <module>shop-wms</module>
         <module>shop-cart</module>
+=======
+        <module>shop-gateway</module>
+>>>>>>> 集成gateway网关服务
     </modules>
 
     <!-- 通用 -->
@@ -69,6 +73,13 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+                <version>2.1.0.RELEASE</version>
+            </dependency>
+
+            <!-- gateway网关 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
                 <version>2.1.0.RELEASE</version>
             </dependency>
 
