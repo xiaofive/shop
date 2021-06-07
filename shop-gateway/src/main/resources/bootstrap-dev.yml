@@ -1,0 +1,15 @@
+spring:
+   application:
+     name: shop-gateway
+   cloud:
+     nacos:
+       discovery:
+         server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+         namespace: shop-gateway-dev
+
+       config:
+         server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+         namespace: shop-gateway-dev
+         file-extension: yml
+         group: SHOP
+
