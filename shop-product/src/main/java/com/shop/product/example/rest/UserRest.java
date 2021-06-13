@@ -20,7 +20,7 @@ import javax.validation.Valid;
  * Author: wang Y
  * Date: 2021-05-20
  */
-@RequestMapping("/rest/user")
+@RequestMapping("/api/product/rest/user")
 @RestController
 public class UserRest {
 
