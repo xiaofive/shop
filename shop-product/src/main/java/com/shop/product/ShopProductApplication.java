@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
         "com.shop.product.example.mapper",
         "com.shop.product.category.mapper",
         "com.shop.product.brand.mapper",
-        "com.shop.product.product.mapper"
+        "com.shop.product.product.mapper",
+        "com.shop.product.discount.mapper"
 })
 @EnableDiscoveryClient
 @RestController
