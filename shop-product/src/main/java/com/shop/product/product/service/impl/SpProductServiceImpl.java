@@ -2,6 +2,15 @@ package com.shop.product.product.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shop.common.util.BeanConvertUtils;
+import com.shop.product.discount.bean.entity.SpMemberPrice;
+import com.shop.product.discount.bean.entity.SpProductFullReduction;
+import com.shop.product.discount.bean.entity.SpProductLadder;
+import com.shop.product.discount.bean.req.SpMemberPriceReq;
+import com.shop.product.discount.bean.req.SpProductFullReductionReq;
+import com.shop.product.discount.bean.req.SpProductLadderReq;
+import com.shop.product.discount.mapper.SpMemberPriceMapper;
+import com.shop.product.discount.mapper.SpProductFullReductionMapper;
+import com.shop.product.discount.mapper.SpProductLadderMapper;
 import com.shop.product.product.bean.entity.SpProduct;
 import com.shop.product.product.bean.req.SpProductAddReq;
 import com.shop.product.product.mapper.SpProductMapper;
@@ -17,12 +26,33 @@ public class SpProductServiceImpl extends ServiceImpl<SpProductMapper, SpProduct
     @Resource
     private SpProductMapper spProductMapper;
 
+    @Resource
+    private SpProductLadderMapper spProductLadderMapper;
+
+    @Resource
+    private SpProductFullReductionMapper spProductFullReductionMapper;
+
+    @Resource
+    private SpMemberPriceMapper spMemberPriceMapper;
+
     @Override
     public void create(SpProductAddReq spProductAddReq) {
         SpProduct spProduct = BeanConvertUtils.map(spProductAddReq, SpProduct.class);
-        spProductMapper.insert(spProduct);
-        //库存
+        int productId = spProductMapper.insert(spProduct);
+        //满减金额
+        List<SpProductLadderReq> spProductLadderReqs = spProductAddReq.getSpProductLadderReqs();
+        List<SpProductLadder> spProductLadders = BeanConvertUtils.listMap(spProductLadderReqs, SpProductLadder.class);
+        spProductLadders.stream().forEach(spProductLadder -> spProductLadderMapper.insert(spProductLadder));
+        //满减折扣
+        List<SpProductFullReductionReq> spProductFullReductionReqs = spProductAddReq.getSpProductFullReductionReqs();
+        List<SpProductFullReduction> spProductFullReductions = BeanConvertUtils.listMap(spProductFullReductionReqs, SpProductFullReduction.class);
+        spProductFullReductions.stream().forEach(spProductFullReduction -> spProductFullReductionMapper.insert(spProductFullReduction));
+        //会员价
+        List<SpMemberPriceReq> spMemberPriceReqs = spProductAddReq.getSpMemberPriceReqs();
+        List<SpMemberPrice> spMemberPrices = BeanConvertUtils.listMap(spMemberPriceReqs, SpMemberPrice.class);
+        spMemberPrices.stream().forEach(spMemberPrice -> spMemberPriceMapper.insert(spMemberPrice));
         //属性
+        //库存
     }
 
     @Override

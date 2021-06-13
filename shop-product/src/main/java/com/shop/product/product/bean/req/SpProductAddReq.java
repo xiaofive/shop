@@ -2,6 +2,9 @@ package com.shop.product.product.bean.req;
 
 import com.shop.common.dto.wms.SpSkuStockDTO;
 import com.shop.product.category.bean.entity.SpProductAttributeValue;
+import com.shop.product.discount.bean.req.SpMemberPriceReq;
+import com.shop.product.discount.bean.req.SpProductFullReductionReq;
+import com.shop.product.discount.bean.req.SpProductLadderReq;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,7 +14,7 @@ import java.util.List;
 
 /**
  * 新增商品req
- *
+ * <p>
  * Author: wang Y
  * Date: 2021-06-01
  */
@@ -171,10 +174,12 @@ public class SpProductAddReq {
      */
     private BigDecimal warnStock;
     //-----------关联信息---------------
+    //满减金额
+    private List<SpProductLadderReq> spProductLadderReqs;
+    //满减折扣
+    private List<SpProductFullReductionReq> spProductFullReductionReqs;
     //会员价格
-    private List<Object> memberPriceList;
-    //满减
-    private List<Object> productFullReductionList;
+    private List<SpMemberPriceReq> spMemberPriceReqs;
     //属性值
     private List<SpProductAttributeValue> attributeValueList;
     //库存
