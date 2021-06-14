@@ -2,6 +2,9 @@ package com.shop.product.product.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shop.common.util.BeanConvertUtils;
+import com.shop.product.category.bean.entity.SpProductAttributeValue;
+import com.shop.product.category.bean.req.SpProductAttributeValueReq;
+import com.shop.product.category.mapper.SpProductAttributeValueMapper;
 import com.shop.product.discount.bean.entity.SpMemberPrice;
 import com.shop.product.discount.bean.entity.SpProductFullReduction;
 import com.shop.product.discount.bean.entity.SpProductLadder;
@@ -35,9 +38,13 @@ public class SpProductServiceImpl extends ServiceImpl<SpProductMapper, SpProduct
     @Resource
     private SpMemberPriceMapper spMemberPriceMapper;
 
+    @Resource
+    private SpProductAttributeValueMapper spProductAttributeValueMapper;
+
     @Override
     public void create(SpProductAddReq spProductAddReq) {
         SpProduct spProduct = BeanConvertUtils.map(spProductAddReq, SpProduct.class);
+        //商品基本信息
         int productId = spProductMapper.insert(spProduct);
         //满减金额
         List<SpProductLadderReq> spProductLadderReqs = spProductAddReq.getSpProductLadderReqs();
@@ -51,7 +58,10 @@ public class SpProductServiceImpl extends ServiceImpl<SpProductMapper, SpProduct
         List<SpMemberPriceReq> spMemberPriceReqs = spProductAddReq.getSpMemberPriceReqs();
         List<SpMemberPrice> spMemberPrices = BeanConvertUtils.listMap(spMemberPriceReqs, SpMemberPrice.class);
         spMemberPrices.stream().forEach(spMemberPrice -> spMemberPriceMapper.insert(spMemberPrice));
-        //属性
+        //属性值
+        List<SpProductAttributeValueReq> spProductAttributeReqs = spProductAddReq.getSpProductAttributeValueReqs();
+        List<SpProductAttributeValue> spProductAttributeValues = BeanConvertUtils.listMap(spProductAttributeReqs, SpProductAttributeValue.class);
+        spProductAttributeValues.stream().forEach(spProductAttributeValue -> spProductAttributeValueMapper.insert(spProductAttributeValue));
         //库存
     }
 

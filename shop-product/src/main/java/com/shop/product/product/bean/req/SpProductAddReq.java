@@ -2,6 +2,7 @@ package com.shop.product.product.bean.req;
 
 import com.shop.common.dto.wms.SpSkuStockDTO;
 import com.shop.product.category.bean.entity.SpProductAttributeValue;
+import com.shop.product.category.bean.req.SpProductAttributeValueReq;
 import com.shop.product.discount.bean.req.SpMemberPriceReq;
 import com.shop.product.discount.bean.req.SpProductFullReductionReq;
 import com.shop.product.discount.bean.req.SpProductLadderReq;
@@ -181,7 +182,7 @@ public class SpProductAddReq {
     //会员价格
     private List<SpMemberPriceReq> spMemberPriceReqs;
     //属性值
-    private List<SpProductAttributeValue> attributeValueList;
+    private List<SpProductAttributeValueReq> spProductAttributeValueReqs;
     //库存
     private List<SpSkuStockDTO> stockList;
 
