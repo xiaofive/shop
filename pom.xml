@@ -34,6 +34,7 @@
         <module>redis-cluster-client</module>
         <module>shop-product</module>
         <module>shop-wms</module>
+        <module>shop-cart</module>
     </modules>
 
     <!-- 通用 -->
