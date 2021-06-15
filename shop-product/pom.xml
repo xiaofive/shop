@@ -40,9 +40,16 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!--openfein依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- gateway网关 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
         <!-- Mysql -->
