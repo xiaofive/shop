@@ -18,6 +18,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 })
 public class RedisClusterClientApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(RedisClusterClientApplication.class, args);
     }
