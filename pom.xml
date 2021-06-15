@@ -33,12 +33,9 @@
         <module>shop-common</module>
         <module>redis-cluster-client</module>
         <module>shop-product</module>
-<<<<<<< HEAD
         <module>shop-wms</module>
         <module>shop-cart</module>
-=======
         <module>shop-gateway</module>
->>>>>>> 集成gateway网关服务
     </modules>
 
     <!-- 通用 -->

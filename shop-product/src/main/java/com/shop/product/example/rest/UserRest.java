@@ -21,12 +21,8 @@ import javax.validation.Valid;
  * Author: wang Y
  * Date: 2021-05-20
  */
-<<<<<<< HEAD
 @Api(tags = "测试")
-@RequestMapping("/rest/user")
-=======
 @RequestMapping("/api/product/rest/user")
->>>>>>> gateway 网关负载均衡配置测试
 @RestController
 public class UserRest {
 
