@@ -34,6 +34,12 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!--openfein依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
         <!--spring boot 2.0以后默认使用lettuce-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
