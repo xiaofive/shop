@@ -78,6 +78,13 @@
                 <version>2.1.0.RELEASE</version>
             </dependency>
 
+            <!--openfein依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>2.1.0.RELEASE</version>
+            </dependency>
+
             <!-- ============================Druid数据源_Mybatis_plus============================= -->
             <!-- Druid数据源 -->
             <dependency>

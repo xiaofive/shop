@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * Redis-Cluster-Client公共服务
@@ -11,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * Date: 2021-05-29
  */
 @EnableDiscoveryClient
+@EnableFeignClients
 @SpringBootApplication(exclude = { //1.排除SpringBoot自带的数据源配置
         DataSourceAutoConfiguration.class
 })
