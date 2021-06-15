@@ -18,7 +18,7 @@ public class SpProductCategoryVO implements SPSelectorVORule {
     private Integer productNum;
     private String productUnit;
     private Boolean isNav;
-    private Integer enable;
+    private Boolean enable;
     private Integer sort;
     private String icon;
     private String keywords;
