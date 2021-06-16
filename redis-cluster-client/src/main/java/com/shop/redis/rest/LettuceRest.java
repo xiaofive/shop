@@ -44,5 +44,12 @@ public class LettuceRest {
         return get;
     }
 
+    @ApiOperation(value = "testFeignFallBack")
+    @GetMapping("/redis/lettuce/testFeignFallBack")
+    public String testFeignFallBack() throws Exception{
+        Thread.sleep(2000);
+        return "testFeignFallBack";
+    }
+
 
 }

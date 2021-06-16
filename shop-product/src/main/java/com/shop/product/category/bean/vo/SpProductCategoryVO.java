@@ -11,6 +11,8 @@ import lombok.Data;
 @Data
 public class SpProductCategoryVO implements SPSelectorVORule {
 
+    private Long id; //仅作更新
+
     private String refId;
     private Long parentId;
     private String name;

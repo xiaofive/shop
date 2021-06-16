@@ -35,7 +35,7 @@ public class SpProductCategoryReq {
     private Boolean isNav;
 
     @NotNull(message = "not_empty")
-    private Integer enable;
+    private Boolean enable;
 
     @NotNull(message = "not_empty")
     private Integer sort;

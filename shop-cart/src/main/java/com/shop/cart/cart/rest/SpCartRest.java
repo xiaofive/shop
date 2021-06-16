@@ -1,6 +1,8 @@
 package com.shop.cart.cart.rest;
 
 import com.shop.cart.cart.service.SpCartService;
+import com.shop.cart.feign.ShopResdisFeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,9 @@ public class SpCartRest {
     @Resource
     private SpCartService spCartService;
 
+    @Resource
+    private ShopResdisFeignClient rfc;
+
     //1.加入购物车
     //2.更新购物车
     //3.删除购物车中的商品
@@ -33,6 +38,18 @@ public class SpCartRest {
     //12.提交订单接口
 
     //购物车-Cache-DB 缓存一致性设计
+
+    /**
+     * test feign 调用、熔断
+     *
+     * Author: wang Y
+     * Date: 2021-06-16
+     */
+    @GetMapping
+    public String testFallBack(){
+        System.out.println("request");
+        return rfc.testFeignFallBack();
+    }
 
 
 }
