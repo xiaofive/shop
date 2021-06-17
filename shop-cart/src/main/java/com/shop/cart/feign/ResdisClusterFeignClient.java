@@ -3,9 +3,13 @@ package com.shop.cart.feign;
 import com.shop.common.dto.redis.RedisDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Collections;
+import java.util.Map;
 
 
 /**
@@ -16,10 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @FeignClient(
         name = "redis-cluster-client",
-        fallback = ShopResdisFeignClient.DefaultFallback.class,
+        fallback = ResdisClusterFeignClient.DefaultFallback.class,
         decode404 = true //避免对正常的业务异常进行熔断处理，可以重写一下Feign的errorDecoder
 )
-public interface ShopResdisFeignClient {
+public interface ResdisClusterFeignClient {
 
     @PostMapping("/rest/lettuce/redis/lettuce/set")
     void set(com.shop.common.dto.redis.RedisDTO redisDTO);
@@ -29,6 +33,18 @@ public interface ShopResdisFeignClient {
 
     @GetMapping("/rest/lettuce/redis/lettuce/testFeignFallBack")
     String testFeignFallBack();
+
+    @PostMapping("/redis/lettuce/hset")
+    void hset(RedisDTO redisDTO);
+
+    @GetMapping("/rest/lettuce/redis/lettuce/hget/{key}/{field}")
+    Object hget(@PathVariable("key") String key, @PathVariable("field") String field);
+
+    @GetMapping("/rest/lettuce/redis/lettuce/hgetAll/{key}")
+    Map<String, String> hgetAll(@PathVariable("key") String key);
+
+    @DeleteMapping("/rest/lettuce/redis/lettuce/hdel/{key}/{field}")
+    Long hdel(@PathVariable("key") String key, @PathVariable("field") String field);
 
     /**
      * shop-redis 降级服务
@@ -42,7 +58,7 @@ public interface ShopResdisFeignClient {
      * Date: 2021-06-15
      */
     @Component
-    class DefaultFallback implements ShopResdisFeignClient {
+    class DefaultFallback implements ResdisClusterFeignClient {
 
         @Override
         public void set(RedisDTO redisDTO) {
@@ -58,6 +74,27 @@ public interface ShopResdisFeignClient {
         public String testFeignFallBack() {
             return "熔断降级返回：testFeignFallBack";
         }
+
+        @Override
+        public void hset(RedisDTO redisDTO) {
+
+        }
+
+        @Override
+        public Object hget(String key, String field) {
+            return "熔断降级返回：hget fail";
+        }
+
+        @Override
+        public Map<String, String> hgetAll(String key) {
+            return Collections.emptyMap();
+        }
+
+        @Override
+        public Long hdel(String key, String field) {
+            return null;
+        }
+
     }
 
 }

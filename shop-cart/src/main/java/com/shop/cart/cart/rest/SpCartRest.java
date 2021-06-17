@@ -1,8 +1,9 @@
 package com.shop.cart.cart.rest;
 
 import com.shop.cart.cart.service.SpCartService;
-import com.shop.cart.feign.ShopResdisFeignClient;
+import com.shop.cart.feign.ResdisClusterFeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,23 @@ public class SpCartRest {
     private SpCartService spCartService;
 
     @Resource
-    private ShopResdisFeignClient rfc;
+    private ResdisClusterFeignClient rfc;
+
+
+    /**
+     * 加入购物车
+     *
+     * Author: wang Y
+     * Date: 2021-06-17
+     */
+    @PostMapping
+    public void addCart() {
+
+    }
+
+
+
+
 
     //1.加入购物车
     //2.更新购物车
@@ -41,12 +58,12 @@ public class SpCartRest {
 
     /**
      * test feign 调用、熔断
-     *
+     * <p>
      * Author: wang Y
      * Date: 2021-06-16
      */
     @GetMapping
-    public String testFallBack(){
+    public String testFallBack() {
         System.out.println("request");
         return rfc.testFeignFallBack();
     }

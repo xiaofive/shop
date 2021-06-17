@@ -1,6 +1,6 @@
 package com.shop.redis;
 
-import com.shop.redis.dao.RedisDTO;
+import com.shop.redis.dao.RedisDAO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,16 +21,16 @@ public class LettuceDAOTest {
 
     @Autowired
     @Qualifier("lettuceServiceImpl")
-    private RedisDTO redisDTO;
+    private RedisDAO redisDAO;
 
     @Test
     public void testSet() {
-        redisDTO.set(null, "k1", "test123456");
+        redisDAO.set(null, "k1", "test123456");
     }
 
     @Test
     public void testGet() {
-        String val = redisDTO.get(null, "k1");
+        String val = redisDAO.get(null, "k1");
         log.info("key：k1_value:" + val);
     }
 

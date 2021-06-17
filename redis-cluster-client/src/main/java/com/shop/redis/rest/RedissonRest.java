@@ -1,6 +1,6 @@
 package com.shop.redis.rest;
 
-import com.shop.redis.dao.RedisDTO;
+import com.shop.redis.dao.RedisDAO;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 操作redis的控制层，使用lettuce操作
  *
- * @author dijia478
- * @date 2020-12-16 11:26
+ * Author: wang Y
+ * Date: 2021-06-17
  */
 @RequestMapping("/rest/redisson")
 @RestController
@@ -22,6 +22,6 @@ public class RedissonRest {
 
     @Autowired
     @Qualifier("redissonServiceImpl")
-    private RedisDTO redisDTO;
+    private RedisDAO redisDAO;
 
 }
