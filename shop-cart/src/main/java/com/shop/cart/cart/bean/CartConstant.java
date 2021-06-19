@@ -11,4 +11,6 @@ public class CartConstant {
     public final static String CART_CACHE = "CART_CACHE";
     public final static String CART_SELECT_CACHE = "CART_SELECT_CACHE";
 
+    public final static String COOKIE_CART ="cookie_cart";
+
 }

@@ -1,7 +1,9 @@
 package com.shop.cart.cart.dao.impl;
 
+import cn.hutool.core.map.MapUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.shop.cart.cart.bean.CartConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
@@ -14,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,13 +57,17 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
     @Override
     public void addCart(SpCartCacheDTO spCartCacheDTO) {
 
+        //校验商品是否存在
+        //skuId/规格 是否存在
+        //校验商品信息是否合法 是否上架 库存 最大购买数量....
+
         Long userId = ShiroUtils.getCurrentUserId();
 
         SpCartCacheDTO _cartCacheDTO = null;
         String cartJsonStr = rfc.hget(CartConstant.CART_CACHE + userId, spCartCacheDTO.getSplitKey());
         log.warn("cache cart res:{}", cartJsonStr);
         if (StringUtils.isNotBlank(cartJsonStr)) {
-            _cartCacheDTO = JSONObject.parseObject(cartJsonStr.toString(), SpCartCacheDTO.class);
+            _cartCacheDTO = JSONObject.parseObject(cartJsonStr, SpCartCacheDTO.class);
         }
         if (null != _cartCacheDTO) {
             _cartCacheDTO.setAddPrice(spCartCacheDTO.getAddPrice());
@@ -80,6 +87,37 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
                 .setField(_cartCacheDTO.getSplitKey())
                 .setValue("1");
         rfc.hset(redisSelectDTO);
+
+    }
+
+    @Override
+    public void mergeToCart(List<SpCartCacheDTO> unLoginCarts) {
+
+        if (CollectionUtils.isEmpty(unLoginCarts)) {
+            return;
+        }
+
+        Long userId = ShiroUtils.getCurrentUserId();
+        Map<String, String> _cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userId);
+        log.warn("cache cart res:{}", JSON.toJSONString(_cartDTOs));
+
+        if (MapUtil.isEmpty(_cartDTOs)) {
+            unLoginCarts.stream().forEach(this::addCart);
+            return;
+        }
+
+        for (SpCartCacheDTO unLoginCart : unLoginCarts) {
+            if (_cartDTOs.containsKey(unLoginCart.getSplitKey())) {
+                String _cartDTOStr = _cartDTOs.get(unLoginCart.getSplitKey());
+                SpCartCacheDTO _cartCacheDTO = JSONObject.parseObject(_cartDTOStr, SpCartCacheDTO.class);
+                _cartCacheDTO.setAddPrice(unLoginCart.getAddPrice())
+                        .setQty(_cartCacheDTO.getQty() + unLoginCart.getQty());
+                addCart(_cartCacheDTO);
+                continue;
+            }
+            addCart(unLoginCart);
+        }
+
 
     }
 

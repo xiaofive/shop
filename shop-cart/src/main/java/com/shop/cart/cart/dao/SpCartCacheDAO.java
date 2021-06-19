@@ -2,6 +2,8 @@ package com.shop.cart.cart.dao;
 
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 
+import java.util.List;
+
 public interface SpCartCacheDAO {
 
     /**
@@ -13,6 +15,15 @@ public interface SpCartCacheDAO {
      * @Date: 2021-06-17
      */
     void addCart(SpCartCacheDTO spCartCacheDTO);
+
+    /**
+     * 合并离线购物车
+     *
+     * @param spCartCacheDTOS
+     * @return: void
+     * @Date: 2021-06-20
+     */
+    void mergeToCart(List<SpCartCacheDTO> spCartCacheDTOS);
 
     /**
      * 统计当前用户购物车品相总数

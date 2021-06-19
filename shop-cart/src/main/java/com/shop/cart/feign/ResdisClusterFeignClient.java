@@ -1,14 +1,12 @@
 package com.shop.cart.feign;
 
 import com.shop.common.dto.redis.RedisDTO;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.UUID;
 
 
 /**
@@ -34,10 +32,10 @@ public interface ResdisClusterFeignClient {
     String testFeignFallBack();
 
     @GetMapping("/rest/lettuce/redis/lettuce/hget/{key}/{field}")
-    String hget(@PathVariable("key") String key, @PathVariable("field") String field) ;
+    String hget(@PathVariable("key") String key, @PathVariable("field") String field);
 
     @PostMapping("/rest/lettuce/redis/lettuce/hset")
-     void hset(@RequestBody RedisDTO redisDTO);
+    void hset(@RequestBody RedisDTO redisDTO);
 
     @GetMapping("/rest/lettuce/redis/lettuce/hgetAll/{key}")
     Map<String, String> hgetAll(@PathVariable("key") String key);

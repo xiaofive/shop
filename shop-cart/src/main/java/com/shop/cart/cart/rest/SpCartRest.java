@@ -2,12 +2,16 @@ package com.shop.cart.cart.rest;
 
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
+import com.shop.cart.cart.util.CartUtil;
 import com.shop.cart.feign.ResdisClusterFeignClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 
 /**
  * 购物车服务
@@ -27,18 +31,24 @@ public class SpCartRest {
     /**
      * 加入购物车
      * 返回商品总数
-     * Author: wang Y
-     * Date: 2021-06-17
+     *
+     * @param cartCacheDTO
+     * @return: java.lang.Integer
+     * @Date: 2021-06-20
      */
     @ApiOperation("加入购物车")
     @PostMapping
-    public Integer addCart(@RequestBody SpCartCacheDTO cartCacheDTO) {
-        //校验用户是否登录
-        //校验商品是否存在
-        //skuId/规格 是否存在
+    public Integer addCart(@RequestBody SpCartCacheDTO cartCacheDTO, HttpServletRequest request) {
+        Boolean isLogin = true;
+        if (!isLogin) {
+            Cookie cookie = CartUtil.getCookie(request);
+            if (null != cookie) {
+                cartCacheDAO.mergeToCart(Collections.emptyList());
+            }
+        }
         cartCacheDAO.addCart(cartCacheDTO);
-        Integer total = cartCacheDAO.countCartItemQty();
-        return total;
+        return cartCacheDAO.countCartItemQty();
+
     }
 
 
