@@ -1,15 +1,14 @@
 package com.shop.cart.feign;
 
 import com.shop.common.dto.redis.RedisDTO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -34,17 +33,26 @@ public interface ResdisClusterFeignClient {
     @GetMapping("/rest/lettuce/redis/lettuce/testFeignFallBack")
     String testFeignFallBack();
 
-    @PostMapping("/redis/lettuce/hset")
-    void hset(RedisDTO redisDTO);
-
     @GetMapping("/rest/lettuce/redis/lettuce/hget/{key}/{field}")
-    Object hget(@PathVariable("key") String key, @PathVariable("field") String field);
+    String hget(@PathVariable("key") String key, @PathVariable("field") String field) ;
+
+    @PostMapping("/rest/lettuce/redis/lettuce/hset")
+     void hset(@RequestBody RedisDTO redisDTO);
 
     @GetMapping("/rest/lettuce/redis/lettuce/hgetAll/{key}")
     Map<String, String> hgetAll(@PathVariable("key") String key);
 
     @DeleteMapping("/rest/lettuce/redis/lettuce/hdel/{key}/{field}")
     Long hdel(@PathVariable("key") String key, @PathVariable("field") String field);
+
+    @DeleteMapping("/redis/lettuce/watch/{field}")
+    void watch(@PathVariable("key") String key);
+
+    @DeleteMapping("/redis/lettuce/unwatch")
+    void unwatch();
+
+    @DeleteMapping("/redis/lettuce/multi")
+    void multi();
 
     /**
      * shop-redis 降级服务
@@ -77,12 +85,13 @@ public interface ResdisClusterFeignClient {
 
         @Override
         public void hset(RedisDTO redisDTO) {
-
+            System.out.println("hset 熔断");
         }
 
         @Override
-        public Object hget(String key, String field) {
-            return "熔断降级返回：hget fail";
+        public String hget(String key, String field) {
+            System.out.println("熔断降级返回：hget fail");
+            return null;
         }
 
         @Override
@@ -95,6 +104,20 @@ public interface ResdisClusterFeignClient {
             return null;
         }
 
+        @Override
+        public void watch(String key) {
+
+        }
+
+        @Override
+        public void unwatch() {
+
+        }
+
+        @Override
+        public void multi() {
+
+        }
     }
 
 }

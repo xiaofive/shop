@@ -65,5 +65,32 @@ public interface RedisDAO {
      */
     Long hdel(String logId, String key, String field);
 
+    /**
+     * redis中的watch方法
+     *
+     * @param logId
+     * @param key
+     * @return: java.lang.Long
+     * @Date: 2021-06-18
+     */
+    void watch(String logId, String key);
+
+    /**
+     * redis中的unWatch方法
+     *
+     * @param logId
+     * @return: void
+     * @Date: 2021-06-18
+     */
+    void unWatch(String logId);
+
+    /**
+     * redis中的multi方法
+     *
+     * @param logId
+     * @return: void
+     * @Date: 2021-06-18
+     */
+    void multi(String logId);
 
 }

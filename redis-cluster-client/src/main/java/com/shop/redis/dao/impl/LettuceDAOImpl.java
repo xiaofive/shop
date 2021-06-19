@@ -92,4 +92,34 @@ public class LettuceDAOImpl implements RedisDAO {
         return hdel;
     }
 
+    @Override
+    public void watch(String logId, String key) {
+        try {
+            rt.watch(key);
+            log.debug("[logId:{}] watch redis key: {}", logId, key);
+        } catch (Exception e) {
+            log.error("[logId:{}] watch redis key: {}", logId, key);
+        }
+    }
+
+    @Override
+    public void unWatch(String logId) {
+        try {
+            rt.unwatch();
+            log.debug("[logId:{}] unWatch redis", logId);
+        } catch (Exception e) {
+            log.error("[logId:{}] unWatch redis", logId);
+        }
+    }
+
+    @Override
+    public void multi(String logId) {
+        try {
+            rt.multi();
+            log.debug("[logId:{}] multi redis", logId);
+        } catch (Exception e) {
+            log.error("[logId:{}] multi redis", logId);
+        }
+    }
+
 }

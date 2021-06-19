@@ -42,5 +42,20 @@ public class JedisDAOImpl implements RedisDAO {
         return null;
     }
 
+    @Override
+    public void watch(String logId, String key) {
+
+    }
+
+    @Override
+    public void unWatch(String logId) {
+
+    }
+
+    @Override
+    public void multi(String logId) {
+
+    }
+
 
 }

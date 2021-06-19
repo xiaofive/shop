@@ -14,4 +14,14 @@ public interface SpCartCacheDAO {
      */
     void addCart(SpCartCacheDTO spCartCacheDTO);
 
+    /**
+     * 统计当前用户购物车品相总数
+     * HLEN key
+     * 获取哈希表中字段的数量
+     *
+     * @return: java.lang.Integer
+     * @Date: 2021-06-19
+     */
+    Integer countCartItemQty();
+
 }

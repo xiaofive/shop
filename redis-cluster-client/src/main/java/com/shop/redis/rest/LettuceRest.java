@@ -69,7 +69,7 @@ public class LettuceRest {
      */
     @ApiOperation(value = "redis的hset命令")
     @PostMapping("/redis/lettuce/hset")
-    public void hset(RedisDTO redisDTO) {
+    public void hset(@RequestBody RedisDTO redisDTO) {
         String logId = UUID.randomUUID().toString();
         log.info("[logId:{}] receive POST request [/redis/lettuce/hset], requestBody: {}", logId, redisDTO);
         redisDAO.hset(logId, redisDTO.getKey(), redisDTO.getField(), redisDTO.getValue());
@@ -85,11 +85,11 @@ public class LettuceRest {
      */
     @ApiOperation(value = "redis的hget命令")
     @GetMapping("/redis/lettuce/hget/{key}/{field}")
-    public Object hget(@PathVariable("key") String key, @PathVariable("field") String field) {
+    public String hget(@PathVariable("key") String key, @PathVariable("field") String field) {
         String logId = UUID.randomUUID().toString();
         log.info("[logId:{}] receive GET request [/redis/lettuce/hget/{}/{}]", logId, key, field);
-        Object hget = redisDAO.hget(logId, key, field);
-        log.info("[logId:{}] resp: {}", logId, hget);
+        String hget = redisDAO.hget(logId, key, field);
+        log.info("[logId:{}] hget resp: {}", logId, hget);
         return hget;
     }
 
@@ -128,6 +128,52 @@ public class LettuceRest {
         return hdel;
     }
 
+    /**
+     * redis的watch命令
+     *
+     * @param key
+     * @Param:
+     * @return: java.lang.Long
+     * @Date: 2021-06-18
+     */
+    @ApiOperation(value = "redis的watch命令")
+    @DeleteMapping("/redis/lettuce/watch/{field}")
+    public void watch(@PathVariable("key") String key) {
+        String logId = UUID.randomUUID().toString();
+        log.info("[logId:{}] receive watch request [/redis/lettuce/watch/{}]", logId, key);
+        redisDAO.watch(logId, key);
+        log.info("[logId:{}]", logId);
+    }
+
+    /**
+     * redis的unwatch命令
+     *
+     * @return: void
+     * @Date: 2021-06-18
+     */
+    @ApiOperation(value = "redis的unwatch命令")
+    @DeleteMapping("/redis/lettuce/unwatch")
+    public void unwatch() {
+        String logId = UUID.randomUUID().toString();
+        log.info("[logId:{}] receive DELETE unwatch [/redis/lettuce/unwatch]", logId);
+        redisDAO.unWatch(logId);
+        log.info("[logId:{}]", logId);
+    }
+
+    /**
+     * redis的multi命令
+     *
+     * @return: void
+     * @Date: 2021-06-18
+     */
+    @ApiOperation(value = "redis的multi命令")
+    @DeleteMapping("/redis/lettuce/multi")
+    public void multi() {
+        String logId = UUID.randomUUID().toString();
+        log.info("[logId:{}] receive DELETE unwatch [/redis/lettuce/multi]", logId);
+        redisDAO.multi(logId);
+        log.info("[logId:{}]", logId);
+    }
 
     /**
      * test redis feign

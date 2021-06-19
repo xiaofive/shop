@@ -14,8 +14,8 @@ public class ShiroUtils {
      * @return: java.lang.String
      * @Date: 2021-06-14
      */
-    public static String getCurrentUserId() {
-        return "1";
+    public static Long getCurrentUserId() {
+        return 1L;
     }
 
 }

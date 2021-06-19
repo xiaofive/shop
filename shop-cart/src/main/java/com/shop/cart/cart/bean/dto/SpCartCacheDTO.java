@@ -1,6 +1,7 @@
 package com.shop.cart.cart.bean.dto;
 
-import com.shop.cart.cart.bean.CartConstant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -8,6 +9,8 @@ import java.math.BigDecimal;
 
 /**
  * 购物车缓存-Hash存储
+ *                  key             field               val
+ * 购物车缓存        userId     productId + skuId      SpCartCacheDTO
  * <p>
  * Author: wang Y
  * Date: 2021-06-14
@@ -28,7 +31,7 @@ public class SpCartCacheDTO {
     /**
      * 商品数量
      */
-    private BigDecimal qty;
+    private Integer qty;
     /**
      * 加入价 对比商品redis缓存的实时价
      * 比加入时 = 商品redis - 加入价
@@ -36,26 +39,14 @@ public class SpCartCacheDTO {
     private BigDecimal addPrice;
 
     /**
-     * 购物车-Redis-Key
+     * 购物车-Redis-field
      *
      * @return: java.lang.String
      * @Date: 2021-06-14
      */
+    @ApiModelProperty( hidden = true)
     public String getSplitKey() {
-        return CartConstant.CART_CACHE
-                + this.productId
-                + this.skuId;
+        return this.productId + this.skuId;
     }
-
-
-    //    /**
-//     * 商品名称
-//     */
-//    private String productName;
-
-    //    /**
-//     * 商品图片
-//     */
-//    private String imgUrl;
 
 }
