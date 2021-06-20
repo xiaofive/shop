@@ -1,17 +1,19 @@
 package com.shop.cart.cart.rest;
 
+import cn.hutool.http.server.HttpServerResponse;
+import com.shop.cart.cart.bean.CookieConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
-import com.shop.cart.cart.util.CartUtil;
 import com.shop.cart.feign.ResdisClusterFeignClient;
+import com.shop.common.util.ShiroUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
+import java.util.UUID;
 
 /**
  * 购物车服务
@@ -30,23 +32,31 @@ public class SpCartRest {
 
     /**
      * 加入购物车
-     * 返回商品总数
      *
-     * @param cartCacheDTO
-     * @return: java.lang.Integer
+     * @param unLoginKeyByCookie 未登录
+     * @param cartCacheDTO       购物车品相
+     * @param response           首次未登录设置cookie
+     * @return: java.lang.Integer 商品总数
      * @Date: 2021-06-20
      */
     @ApiOperation("加入购物车")
     @PostMapping
-    public Integer addCart(@RequestBody SpCartCacheDTO cartCacheDTO, HttpServletRequest request) {
-        Boolean isLogin = true;
+    public Integer addCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
+                           @RequestBody SpCartCacheDTO cartCacheDTO,
+                           HttpServerResponse response) {
+        boolean isLogin = ShiroUtils.isLogin();
+        String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
+                : StringUtils.isBlank(unLoginKeyByCookie)
+                ? UUID.randomUUID().toString()
+                : unLoginKeyByCookie;
         if (!isLogin) {
-            Cookie cookie = CartUtil.getCookie(request);
-            if (null != cookie) {
-                cartCacheDAO.mergeToCart(Collections.emptyList());
-            }
+            Cookie cookie = new Cookie(CookieConstant.COOKIE_CART, userKey);
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(7200);
+            cookie.setPath("/");
+            response.addCookie(cookie);
         }
-        cartCacheDAO.addCart(cartCacheDTO);
+        cartCacheDAO.addCart(userKey, cartCacheDTO);
         return cartCacheDAO.countCartItemQty();
 
     }

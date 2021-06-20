@@ -18,4 +18,14 @@ public class ShiroUtils {
         return 1L;
     }
 
+    /**
+     * 是否登录
+     *
+     * @return: java.lang.String
+     * @Date: 2021-06-14
+     */
+    public static boolean isLogin() {
+        return false;
+    }
+
 }

@@ -12,6 +12,8 @@ import lombok.experimental.Accessors;
 @Data
 public class SpProductAttributeCategoryVO {
 
+    private Long id; //用作更新
+
     private String name;
     private Integer attributeNum;
     private Integer paramNum;

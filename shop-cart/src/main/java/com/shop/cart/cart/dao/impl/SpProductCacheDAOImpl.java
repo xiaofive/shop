@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 商品缓存操作
- * TODO 缓存预热
+ * TODO 缓存预热 二八
  * Author: wang Y
  * Date: 2021-06-17
  */
