@@ -1,20 +1,22 @@
 package com.shop.cart.cart.dao.impl;
 
+import cn.hutool.core.map.MapUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Sets;
 import com.shop.cart.cart.bean.CartConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
 import com.shop.cart.cart.dao.SpSelectStatusDAO;
 import com.shop.cart.feign.ResdisClusterFeignClient;
 import com.shop.common.dto.redis.RedisDTO;
-import com.shop.common.util.ShiroUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 购物车缓存操作
@@ -87,45 +89,85 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
         rfc.hset(redisSelectDTO);
 
     }
-//
-//    @Override
-//    public void mergeToCart(List<SpCartCacheDTO> unLoginCarts) {
-//
-//        if (CollectionUtils.isEmpty(unLoginCarts)) {
-//            return;
-//        }
-//
-//        Long userId = ShiroUtils.getCurrentUserId();
-//        Map<String, String> _cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userId);
-//        log.warn("cache cart res:{}", JSON.toJSONString(_cartDTOs));
-//
-//        if (MapUtil.isEmpty(_cartDTOs)) {
-//            unLoginCarts.stream().forEach(this::addCart());
-//            return;
-//        }
-//
-//        for (SpCartCacheDTO unLoginCart : unLoginCarts) {
-//            if (_cartDTOs.containsKey(unLoginCart.getSplitKey())) {
-//                String _cartDTOStr = _cartDTOs.get(unLoginCart.getSplitKey());
-//                SpCartCacheDTO _cartCacheDTO = JSONObject.parseObject(_cartDTOStr, SpCartCacheDTO.class);
-//                _cartCacheDTO.setAddPrice(unLoginCart.getAddPrice())
-//                        .setQty(_cartCacheDTO.getQty() + unLoginCart.getQty());
-//                addCart(_cartCacheDTO);
-//                continue;
-//            }
-//            addCart(unLoginCart);
-//        }
-//
-//
-//    }
 
     @Override
-    public Integer countCartItemQty() {
-        Long userId = ShiroUtils.getCurrentUserId();
-        Map<String, String> _cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userId);
+    public void mergeToCart(String loginKey, String unLoginKey) {
+        if (StringUtils.isBlank(loginKey) || StringUtils.isBlank(unLoginKey)) {
+            return;
+        }
+        Map<String, String> _unloginCart = rfc.hgetAll(CartConstant.CART_CACHE + unLoginKey);
+        log.warn("cache cart _unloginCart:{}", JSON.toJSONString(_unloginCart));
+        if (MapUtil.isEmpty(_unloginCart)) {
+            return;
+        }
+        Map<String, String> _loginCart = rfc.hgetAll(CartConstant.CART_CACHE + loginKey);
+        log.warn("cache cart _loginCart:{}", JSON.toJSONString(_loginCart));
+
+        if (MapUtil.isEmpty(_loginCart)) {
+            _unloginCart.entrySet().stream().forEach(unLoginCartVO -> {
+                RedisDTO cartDTO = new RedisDTO();
+                cartDTO.setKey(loginKey)
+                        .setField(unLoginCartVO.getKey())
+                        .setValue(unLoginCartVO.getValue());
+                rfc.hset(cartDTO);
+                //del unLogin cart
+                rfc.hdel(unLoginKey, unLoginCartVO.getKey());
+            });
+            return;
+        }
+
+        Set<String> _loginKeys = _loginCart.keySet();
+        Set<String> _unloginKeys = _loginCart.keySet();
+
+        Set<String> result = Sets.newHashSet();
+        result.addAll(_loginKeys);
+        result.retainAll(_unloginKeys);
+
+        result.stream().forEach(occurKey -> {
+            String loginCartStr = _loginCart.get(occurKey);
+            SpCartCacheDTO loginCartDTO = JSONObject.parseObject(loginCartStr, SpCartCacheDTO.class);
+
+            String unLoginCartStr = _loginCart.get(occurKey);
+            SpCartCacheDTO unLoginCartDTO = JSONObject.parseObject(unLoginCartStr, SpCartCacheDTO.class);
+            //merge ---> unLogin ---> new
+            loginCartDTO.setQty(loginCartDTO.getQty() + unLoginCartDTO.getQty());
+            loginCartDTO.setAddPrice(unLoginCartDTO.getAddPrice());
+            RedisDTO mergeCartDTO = new RedisDTO();
+            mergeCartDTO.setKey(loginKey)
+                    .setField(loginCartDTO.getSplitKey())
+                    .setValue(JSON.toJSONString(loginCartDTO));
+            rfc.hset(mergeCartDTO);
+            //del unLogin cart
+            rfc.hdel(unLoginKey, unLoginCartDTO.getSplitKey());
+        });
+
+        result.clear();
+        //del all right merge cart
+        result.addAll(_unloginKeys);
+        result.removeAll(_loginKeys);
+
+        result.stream().forEach(unLoginCartKey -> {
+            String unLoginNotMergeStr = _loginCart.get(unLoginCartKey);
+            SpCartCacheDTO unLoginNotMergeCart = JSONObject.parseObject(unLoginNotMergeStr, SpCartCacheDTO.class);
+            RedisDTO unLoginNotMergeCartDTO = new RedisDTO();
+            unLoginNotMergeCartDTO.setKey(loginKey)
+                    .setField(unLoginNotMergeCart.getSplitKey())
+                    .setValue(JSON.toJSONString(unLoginNotMergeCartDTO));
+            rfc.hset(unLoginNotMergeCartDTO);
+            //del unLogin cart
+            rfc.hdel(unLoginCartKey, unLoginNotMergeCart.getSplitKey());
+        });
+
+        log.info("merge loginCart and unLoginCart Cache done!");
+
+    }
+
+    @Override
+    public Integer countCartItemQty(String userId) {
+        Map<String, String> cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userId);
         Integer total = 0;
-        for (String item : _cartDTOs.keySet()) {
-            String ItemStr = _cartDTOs.get(item);
+        for (String item : cartDTOs.keySet()) {
+            String ItemStr = cartDTOs.get(item);
             SpCartCacheDTO cartCacheDTO = JSONObject.parseObject(ItemStr, SpCartCacheDTO.class);
             total = total + Integer.valueOf(cartCacheDTO.getQty());
         }

@@ -8,8 +8,8 @@ package com.shop.cart.cart.bean;
  */
 public class CartConstant {
 
-    public final static String CART_CACHE = "CART_CACHE";
-    public final static String CART_SELECT_CACHE = "CART_SELECT_CACHE";
+    public final static String CART_CACHE = "CART_CACHE:";
+    public final static String CART_SELECT_CACHE = "CART_SELECT_CACHE:";
 
     //购物车项是否选中
     public final static String CART_ITEM_SELECT = "1";

@@ -1,6 +1,5 @@
 package com.shop.cart.cart.rest;
 
-import cn.hutool.http.server.HttpServerResponse;
 import com.shop.cart.cart.bean.CookieConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -43,7 +43,7 @@ public class SpCartRest {
     @PostMapping
     public Integer addCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
                            @RequestBody SpCartCacheDTO cartCacheDTO,
-                           HttpServerResponse response) {
+                           HttpServletResponse response) {
         boolean isLogin = ShiroUtils.isLogin();
         String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
                 : StringUtils.isBlank(unLoginKeyByCookie)
@@ -57,7 +57,7 @@ public class SpCartRest {
             response.addCookie(cookie);
         }
         cartCacheDAO.addCart(userKey, cartCacheDTO);
-        return cartCacheDAO.countCartItemQty();
+        return cartCacheDAO.countCartItemQty(userKey);
 
     }
 

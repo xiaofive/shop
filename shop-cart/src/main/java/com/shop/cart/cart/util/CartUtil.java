@@ -3,7 +3,6 @@ package com.shop.cart.cart.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.shop.cart.cart.bean.CartConstant;
 import com.shop.cart.cart.bean.CookieConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import org.apache.commons.lang.StringUtils;
