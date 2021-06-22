@@ -1,6 +1,7 @@
 package com.shop.cart.cart.dao;
 
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
+import com.shop.cart.cart.bean.vo.SpCartInfo;
 
 import java.util.List;
 
@@ -47,6 +48,15 @@ public interface SpCartCacheDAO {
      * @Date: 2021-06-22
      */
     void updateSeleted(String userKey, Integer seleted);
+
+    /**
+     * 获取购物车
+     *
+     * @param userKey
+     * @return: com.shop.cart.cart.bean.vo.SpCartVO
+     * @Date: 2021-06-22
+     */
+    SpCartInfo getCart(String userKey);
 
     /**
      * 合并离线购物车

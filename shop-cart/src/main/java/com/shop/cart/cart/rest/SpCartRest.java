@@ -3,6 +3,7 @@ package com.shop.cart.cart.rest;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.shop.cart.cart.bean.CookieConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
+import com.shop.cart.cart.bean.vo.SpCartInfo;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
 import com.shop.cart.feign.ResdisClusterFeignClient;
 import com.shop.common.util.ShiroUtils;
@@ -134,6 +135,24 @@ public class SpCartRest {
                 ? UUID.randomUUID().toString()
                 : unLoginKeyByCookie;
         cartCacheDAO.updateSeleted(userKey, seleted);
+    }
+
+    /**
+     * 获取购物车
+     *
+     * @param unLoginKeyByCookie
+     * @return: com.shop.cart.cart.bean.vo.SpCartVO
+     * @Date: 2021-06-22
+     */
+    @ApiOperation("获取购物车")
+    @GetMapping("getCart")
+    public SpCartInfo getCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie) {
+        boolean isLogin = ShiroUtils.isLogin();
+        String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
+                : StringUtils.isBlank(unLoginKeyByCookie)
+                ? UUID.randomUUID().toString()
+                : unLoginKeyByCookie;
+        return cartCacheDAO.getCart(userKey);
     }
 
 

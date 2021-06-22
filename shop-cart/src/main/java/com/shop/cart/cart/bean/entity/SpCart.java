@@ -21,7 +21,7 @@ public class SpCart extends BaseEntity {
      */
     private Long userId;
     /**
-     * 商品ID ---> 关联商品缓存
+     * 商品ID ---> 关联商品缓存/搜索
      */
     private Long productId;
     /**
