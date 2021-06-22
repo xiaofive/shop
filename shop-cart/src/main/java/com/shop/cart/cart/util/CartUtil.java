@@ -72,13 +72,13 @@ public class CartUtil {
         spCartCacheDTO.setAddPrice(new BigDecimal(23.56))
                 .setQty(1)
                 .setProductId(33L)
-                .setSkuId("33");
+                .setSkuId(33L);
 
         SpCartCacheDTO spCartCacheDTOTwo = new SpCartCacheDTO();
         spCartCacheDTOTwo.setAddPrice(new BigDecimal(23.56))
                 .setQty(1)
                 .setProductId(55L)
-                .setSkuId("55");
+                .setSkuId(55L);
 
         List<SpCartCacheDTO> carts = Lists.newLinkedList();
         carts.add(spCartCacheDTO);

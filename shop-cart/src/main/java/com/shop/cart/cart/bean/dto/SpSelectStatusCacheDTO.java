@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 /**
  * 商品选中状态Cache -HASH
- *                  key             field               val
+ * key             field               val
  * 选中状态缓存      userId     productId + skuId       isSelect
  * Author: wang Y
  * Date: 2021-06-19
@@ -17,6 +17,8 @@ public class SpSelectStatusCacheDTO {
     private Long userId;
 
     private Long productId;
+
+    private Long skuId;
 
     /**
      * 购物车商品勾选状态 勾选传1，不勾选传0
@@ -30,7 +32,7 @@ public class SpSelectStatusCacheDTO {
      * @Date: 2021-06-14
      */
     public String getSplitKey() {
-        return this.productId.toString();
+        return this.productId.toString() + this.skuId;
     }
 
 }

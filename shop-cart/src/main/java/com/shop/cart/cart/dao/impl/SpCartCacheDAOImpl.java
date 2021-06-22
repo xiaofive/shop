@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -91,6 +92,52 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
     }
 
     @Override
+    public void delFromCart(String userKey, List<String> splitKey) {
+        splitKey.stream().forEach(field -> rfc.hdel(userKey, field));
+    }
+
+    @Override
+    public void updateCart(String userKey, String splitKey, Integer qty, Integer selected) {
+        String cartJsonStr = rfc.hget(CartConstant.CART_CACHE + userKey, splitKey);
+        log.warn("cache cart res:{}", cartJsonStr);
+        if (StringUtils.isBlank(cartJsonStr)) {
+            return;
+        }
+        SpCartCacheDTO cartCacheDTO = JSONObject.parseObject(cartJsonStr, SpCartCacheDTO.class);
+        if (qty != null) {
+            cartCacheDTO.setQty(qty);
+            RedisDTO redisDTO = new RedisDTO();
+            redisDTO.setKey(userKey)
+                    .setField(splitKey)
+                    .setValue(JSON.toJSONString(cartCacheDTO));
+            rfc.hset(redisDTO);
+        }
+        if (selected != null) {
+            RedisDTO redisDTO = new RedisDTO();
+            redisDTO.setKey(userKey)
+                    .setField(splitKey)
+                    .setValue(selected.toString());
+            rfc.hset(redisDTO);
+        }
+    }
+
+    @Override
+    public void updateSeleted(String userKey, Integer seleted) {
+        Map<String, String> selectMap = rfc.hgetAll(CartConstant.CART_SELECT_CACHE + userKey);
+        log.warn("cache cart res:{}", selectMap);
+        if (MapUtil.isEmpty(selectMap)) {
+            return;
+        }
+        selectMap.keySet().stream().forEach(field -> {
+            RedisDTO redisDTO = new RedisDTO();
+            redisDTO.setKey(userKey)
+                    .setField(field)
+                    .setValue(seleted.toString());
+            rfc.hset(redisDTO);
+        });
+    }
+
+    @Override
     public void mergeToCart(String loginKey, String unLoginKey) {
         if (StringUtils.isBlank(loginKey) || StringUtils.isBlank(unLoginKey)) {
             return;
@@ -163,8 +210,8 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
     }
 
     @Override
-    public Integer countCartItemQty(String userId) {
-        Map<String, String> cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userId);
+    public Integer countCartItemQty(String userKey) {
+        Map<String, String> cartDTOs = rfc.hgetAll(CartConstant.CART_CACHE + userKey);
         Integer total = 0;
         for (String item : cartDTOs.keySet()) {
             String ItemStr = cartDTOs.get(item);

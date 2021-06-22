@@ -60,7 +60,7 @@ public class ProductAttributeCategoryRest {
      */
     @ApiOperation("批量删除删除商品属性分类")
     @DeleteMapping(value = "deleteBatch")
-    public void deleteBatch(@RequestParam("idList") List<Long> idList) {
+    public void deleteBatch(@RequestBody List<Long> idList) {
         spProductAttributeCategoryService.deleteBatch(idList);
     }
 

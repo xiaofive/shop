@@ -69,7 +69,7 @@ public class ProductCategoryRest {
      */
     @ApiOperation("删除商品分类")
     @DeleteMapping(value = "/deleteBatch")
-    public void deleteBatch(@RequestParam("idList") List<Long> idList) {
+    public void deleteBatch(@RequestBody List<Long> idList) {
         spProductCategoryService.deleteBatch(idList);
     }
 
@@ -81,7 +81,7 @@ public class ProductCategoryRest {
      * @Date: 2021-05-30
      */
     @ApiOperation("修改商品分类")
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/update")
     public void update(@Valid @RequestBody SpProductCategoryReq spProductCategoryReq) {
         if (spProductCategoryReq.getId() == null)
             throw new RuntimeException("id不能为null");
@@ -101,7 +101,7 @@ public class ProductCategoryRest {
      */
     @ApiOperation("导航栏显示状态")
     @PutMapping(value = "/update/isNav")
-    public void updateShowStatus(@RequestParam("idList") List<Long> idList,
+    public void updateShowStatus(@RequestBody List<Long> idList,
                                  @RequestParam("isNav") Boolean isNav) {
         spProductCategoryService.updateShowStatus(idList, isNav);
     }
@@ -116,7 +116,7 @@ public class ProductCategoryRest {
      */
     @ApiOperation("类目是否启用")
     @PutMapping(value = "/update/enable")
-    public void updateEnable(@RequestParam("idList") List<Long> idList,
+    public void updateEnable(@RequestBody List<Long> idList,
                              @RequestParam("enable") Boolean enable) {
         spProductCategoryService.updateEnable(idList, enable);
     }

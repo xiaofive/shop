@@ -54,7 +54,7 @@ public class SpProductCategoryServiceImpl extends ServiceImpl<SpProductCategoryM
         queryWrapper.in("id", idList);
         List<SpProductCategory> olds = spProductCategoryMapper.selectList(queryWrapper);
         olds.stream().forEach(old -> {
-            old.setEnable(isNav);
+            old.setIsNav(isNav);
             spProductCategoryMapper.updateById(old);
         });
 

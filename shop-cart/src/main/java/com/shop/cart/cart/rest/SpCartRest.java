@@ -1,5 +1,6 @@
 package com.shop.cart.cart.rest;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.shop.cart.cart.bean.CookieConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -40,7 +42,7 @@ public class SpCartRest {
      * @Date: 2021-06-20
      */
     @ApiOperation("加入购物车")
-    @PostMapping
+    @PostMapping("addCart")
     public Integer addCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
                            @RequestBody SpCartCacheDTO cartCacheDTO,
                            HttpServletResponse response) {
@@ -61,12 +63,85 @@ public class SpCartRest {
 
     }
 
+    /**
+     * 删除购物车中的品项
+     *
+     * @param unLoginKeyByCookie 未登录
+     * @param productIdAndSkuIds spiltKey = productId + skuId
+     * @return: void
+     * @Date: 2021-06-22
+     */
+    @ApiOperation("删除购物车中的品相")
+    @DeleteMapping("delFromCart")
+    public void delFromCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
+                            @RequestBody List<String> productIdAndSkuIds) {
+        if (CollectionUtils.isEmpty(productIdAndSkuIds)) {
+            return;
+        }
+        boolean isLogin = ShiroUtils.isLogin();
+        String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
+                : StringUtils.isBlank(unLoginKeyByCookie)
+                ? UUID.randomUUID().toString()
+                : unLoginKeyByCookie;
+        cartCacheDAO.delFromCart(userKey, productIdAndSkuIds);
+    }
 
-    //1.加入购物车
-    //2.更新购物车
-    //3.删除购物车中的商品
-    //4.合并临时购物车和用户购物车
-    //5.勾选所有商品和全部取消勾选
+    /**
+     * 更新购物车 数量 or 选中状态
+     *
+     * @param unLoginKeyByCookie 未登录
+     * @param productIdAndSkuIds splitKey = productId + skuId
+     * @param qty                数量
+     * @param seleted            选中状态
+     * @return: void
+     * @Date: 2021-06-22
+     */
+    @ApiOperation("更新购物车")
+    @PutMapping("updateCart")
+    public void updateCart(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
+                           @RequestParam("productIdAndSkuIds") String productIdAndSkuIds,
+                           @RequestParam(value = "qty", required = false) Integer qty,
+                           @RequestParam(value = "seleted", required = false) Integer seleted) {
+        if (qty == null && seleted == null) {
+            return;
+        }
+        boolean isLogin = ShiroUtils.isLogin();
+        String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
+                : StringUtils.isBlank(unLoginKeyByCookie)
+                ? UUID.randomUUID().toString()
+                : unLoginKeyByCookie;
+        cartCacheDAO.updateCart(userKey, productIdAndSkuIds, qty, seleted);
+    }
+
+    /**
+     * 勾选所有商品和全部取消勾选
+     *
+     * @param unLoginKeyByCookie splitKey = productId + skuId
+     * @param seleted            选中状态
+     * @return: void
+     * @Date: 2021-06-22
+     */
+    @ApiOperation("勾选所有商品和全部取消勾选")
+    @PutMapping("updateSeleted")
+    public void updateSeleted(@CookieValue(name = CookieConstant.COOKIE_CART, required = false) String unLoginKeyByCookie,
+                              @RequestParam(value = "seleted", required = false) Integer seleted) {
+        if (seleted == null) {
+            return;
+        }
+        boolean isLogin = ShiroUtils.isLogin();
+        String userKey = isLogin ? ShiroUtils.getCurrentUserId().toString()
+                : StringUtils.isBlank(unLoginKeyByCookie)
+                ? UUID.randomUUID().toString()
+                : unLoginKeyByCookie;
+        cartCacheDAO.updateSeleted(userKey, seleted);
+    }
+
+
+    //1.加入购物车 done
+    //2.更新购物车 done
+    //3.删除购物车中的商品 done
+    //4.合并临时购物车和用户购物车 done
+    //5.勾选所有商品和全部取消勾选 done
     //6.查询购物车商品
     //7.查询购物车金额和商品数量
     //8.行销活动聚合页查询参与活动的商品

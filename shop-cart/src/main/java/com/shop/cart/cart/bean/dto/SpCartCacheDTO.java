@@ -1,6 +1,5 @@
 package com.shop.cart.cart.bean.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * 购物车缓存-Hash存储
- *                  key             field               val
+ * key             field               val
  * 购物车缓存        userId     productId + skuId      SpCartCacheDTO
  * <p>
  * Author: wang Y
@@ -26,7 +25,7 @@ public class SpCartCacheDTO {
     /**
      * 商品规格ID 同一规格商品只缓存一份
      */
-    private String skuId;
+    private Long skuId;
 
     /**
      * 商品数量
@@ -44,9 +43,9 @@ public class SpCartCacheDTO {
      * @return: java.lang.String
      * @Date: 2021-06-14
      */
-    @ApiModelProperty( hidden = true)
+    @ApiModelProperty(hidden = true)
     public String getSplitKey() {
-        return this.productId + this.skuId;
+        return this.productId.toString() + this.skuId;
     }
 
 }
