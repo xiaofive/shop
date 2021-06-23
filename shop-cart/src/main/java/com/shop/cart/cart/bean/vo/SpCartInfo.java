@@ -1,5 +1,6 @@
 package com.shop.cart.cart.bean.vo;
 
+import com.shop.cart.cart.bean.dto.SpProductCacheDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -35,16 +36,16 @@ public class SpCartInfo {
     /**
      * 运费，目前运费都是0，显示免运费
      */
-    private BigDecimal freight;
+    private BigDecimal freightPrice;
     /**
      * 整个购物车是否全选
      */
-    private Integer isSelectAll;
+    private Boolean isSelectAll;
 
     /**
      * 商品列表
      */
-    List<ProductVO> productVOList;
+    List<SpProductCacheDTO> productVOList;
 
 
 }

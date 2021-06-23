@@ -9,11 +9,13 @@ import com.shop.cart.feign.ResdisClusterFeignClient;
 import com.shop.common.util.ShiroUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +26,7 @@ import java.util.UUID;
  * Author: wang Y
  * Date: 2021-06-14
  */
+@Slf4j
 @Api(tags = "购物车")
 @RequestMapping("rest/cart")
 @RestController
@@ -52,7 +55,8 @@ public class SpCartRest {
                 : StringUtils.isBlank(unLoginKeyByCookie)
                 ? UUID.randomUUID().toString()
                 : unLoginKeyByCookie;
-        if (!isLogin) {
+        log.warn("userkey:".concat(userKey));
+        if (!isLogin && StringUtils.isBlank(unLoginKeyByCookie)) {
             Cookie cookie = new Cookie(CookieConstant.COOKIE_CART, userKey);
             cookie.setHttpOnly(true);
             cookie.setMaxAge(7200);
@@ -161,7 +165,7 @@ public class SpCartRest {
     //3.删除购物车中的商品 done
     //4.合并临时购物车和用户购物车 done
     //5.勾选所有商品和全部取消勾选 done
-    //6.查询购物车商品
+    //6.查询购物车商品 done
     //7.查询购物车金额和商品数量
     //8.行销活动聚合页查询参与活动的商品
     //9.订单结算接口

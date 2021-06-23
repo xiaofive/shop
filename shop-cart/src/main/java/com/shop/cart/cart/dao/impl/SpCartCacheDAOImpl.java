@@ -6,17 +6,25 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
 import com.shop.cart.cart.bean.CartConstant;
 import com.shop.cart.cart.bean.dto.SpCartCacheDTO;
+import com.shop.cart.cart.bean.dto.SpProductCacheDTO;
 import com.shop.cart.cart.bean.vo.SpCartInfo;
 import com.shop.cart.cart.dao.SpCartCacheDAO;
 import com.shop.cart.cart.dao.SpSelectStatusDAO;
 import com.shop.cart.feign.ResdisClusterFeignClient;
+import com.shop.cart.feign.ShopProductFeignClient;
 import com.shop.common.dto.redis.RedisDTO;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 购物车缓存操作
@@ -32,6 +40,9 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
 
     @Resource
     private ResdisClusterFeignClient rfc;
+
+    @Resource
+    private ShopProductFeignClient sfc;
 
     @Resource
     private SpSelectStatusDAO statusDAO;
@@ -143,25 +154,38 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
         if (MapUtil.isEmpty(cartMap)) {
             return null;
         }
+        //获取购物车
         Collection<String> cartJsonStrList = cartMap.values();
         List<SpCartCacheDTO> spCartCacheDTOS = JSONObject.parseArray(cartJsonStrList.toString(), SpCartCacheDTO.class);
 
+        //获取商品数据
+        List<Long> productIds = spCartCacheDTOS.stream().map(SpCartCacheDTO::getProductId).collect(Collectors.toList());
+        List<SpProductCacheDTO> products = sfc.getProductListByIds(productIds);
+
+        //获取选中状态
+        Map<String, String> selectMap = rfc.hgetAll(CartConstant.CART_SELECT_CACHE + userKey);
+
         SpCartInfo cart = new SpCartInfo();
         //购物车总品项数
-        cart.setTotalQty(null);
+        cart.setTotalQty(spCartCacheDTOS.size());
+
+        Pair<BigDecimal, Pair<BigDecimal, BigDecimal>> totalPricePair = calculationSelectProTotalPrice(selectMap, products);
         //购物车总价
-        cart.setCartTotalPrice(null);
-        // 购物车选中商品总价
-        cart.setSelectProTotalPrice(null);
+        cart.setCartTotalPrice(totalPricePair.getKey());
+        //购物车选中商品总价
+        cart.setSelectProTotalPrice(totalPricePair.getValue().getKey());
         //行销活动优惠金额
-        cart.setCampaignDiscount(null);
+        cart.setCampaignDiscount(totalPricePair.getValue().getValue());
+
+        BigDecimal freightPrice = calculationFreightPrice(selectMap, products);
         //购物车运费
-        cart.setFreight(null);
+        cart.setFreightPrice(freightPrice);
         //购物车是否全选
-        cart.setIsSelectAll(null);
+        boolean isSelectAll = !MapUtil.isNotEmpty(selectMap) || !selectMap.containsValue("0");
+        cart.setIsSelectAll(isSelectAll);
 
         //购物车品相列表
-        cart.setProductVOList(Collections.emptyList());
+        cart.setProductVOList(products);
 
         return cart;
     }
@@ -249,4 +273,34 @@ public class SpCartCacheDAOImpl implements SpCartCacheDAO {
         }
         return total;
     }
+
+    /**
+     * 计算选购物车中选中：
+     * 购物车总价 left
+     * 选中商品总价 r-left
+     * 行销优惠 r-right
+     *
+     * @param selectMap
+     * @param productCacheDTOS
+     * @return: java.math.BigDecimal
+     * @Date: 2021-06-23
+     */
+    private Pair<BigDecimal, Pair<BigDecimal, BigDecimal>> calculationSelectProTotalPrice(Map<String, String> selectMap, List<SpProductCacheDTO> productCacheDTOS) {
+        //TODO
+        return new Pair<>(BigDecimal.TEN, new Pair<>(BigDecimal.TEN, BigDecimal.ZERO));
+    }
+
+    /**
+     * 计算运费
+     *
+     * @param selectMap
+     * @param productCacheDTOS
+     * @return: java.math.BigDecimal
+     * @Date: 2021-06-23
+     */
+    private BigDecimal calculationFreightPrice(Map<String, String> selectMap, List<SpProductCacheDTO> productCacheDTOS) {
+        //TODO
+        return BigDecimal.ONE;
+    }
+
 }
