@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: shop-activity
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-product-prod
+
+      config:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-product-prod
+        file-extension: yml
+        group: SHOP

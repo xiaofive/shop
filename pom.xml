@@ -35,6 +35,7 @@
         <module>shop-product</module>
         <module>shop-wms</module>
         <module>shop-cart</module>
+        <module>shop-activity</module>
         <module>shop-gateway</module>
     </modules>
 
