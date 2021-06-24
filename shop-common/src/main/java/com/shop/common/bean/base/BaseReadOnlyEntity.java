@@ -1,5 +1,6 @@
 package com.shop.common.bean.base;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -19,8 +20,11 @@ public class BaseReadOnlyEntity implements Serializable {
 
     private static final long serialVersionUID = 7050795514815769409L;
 
-    //@TableId(type = IdType.ASSIGN_ID) //TODO 待ID方案完善
-    @TableId
+    ////指定主键生成策略使用雪花算法（默认策略）
+    @TableId(type = IdType.ASSIGN_ID) //TODO 待ID方案完善
+    //@TableId 雪花算法（默认策略）
+//    //指定主键使用数据库ID自增策略
+//    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**

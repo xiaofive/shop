@@ -16,11 +16,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(exclude = { //1.排除SpringBoot自带的数据源配置
         DataSourceAutoConfiguration.class
 })
-public class RedisClusterClientApplication {
+public class ShopRedisApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(RedisClusterClientApplication.class, args);
+        SpringApplication.run(ShopRedisApplication.class, args);
     }
 
 }

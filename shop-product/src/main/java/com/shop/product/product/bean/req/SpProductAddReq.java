@@ -78,7 +78,7 @@ public class SpProductAddReq {
     /**
      * 服务项
      */
-    private String service_ids;
+    private String serviceIds;
     /**
      * 排序字段
      */
@@ -175,12 +175,6 @@ public class SpProductAddReq {
      */
     private BigDecimal warnStock;
     //-----------关联信息---------------
-    //满减金额
-    private List<SpProductLadderReq> spProductLadderReqs;
-    //满减折扣
-    private List<SpProductFullReductionReq> spProductFullReductionReqs;
-    //会员价格
-    private List<SpMemberPriceReq> spMemberPriceReqs;
     //属性值
     private List<SpProductAttributeValueReq> spProductAttributeValueReqs;
     //库存

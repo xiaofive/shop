@@ -1,21 +1,20 @@
-package com.shop.product.product.bean.entity;
+package com.shop.product.product.bean.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 商品 SPU
+ * 商品VO
  * Author: wang Y
- * Date: 2021-06-01
+ * Date: 2021-06-24
  */
-@Accessors(chain = true)
 @Data
-public class SpProduct extends BaseEntity {
+public class SpProductVO {
+
+    private Long id;//用于更新
 
     private Long brandId;
     private Long productCategoryId;

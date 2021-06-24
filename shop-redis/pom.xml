@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.shop</groupId>
-    <artifactId>redis-cluster-client</artifactId>
+    <artifactId>shop-redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>redis-cluster-client</name>
+    <name>shop-redis</name>
     <dependencies>
 
         <!-- 引入商城公共模块 -->

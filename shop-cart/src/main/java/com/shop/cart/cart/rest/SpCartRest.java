@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.UUID;
@@ -167,11 +166,15 @@ public class SpCartRest {
     //5.勾选所有商品和全部取消勾选 done
     //6.查询购物车商品 done
     //7.查询购物车金额和商品数量
+
+    //------------------------------
     //8.行销活动聚合页查询参与活动的商品
-    //9.订单结算接口
     //10.查询优惠券列表
-    //11.判断商品是否支持配送
     //12.提交订单接口
+    //9.订单结算接口
+
+    //11.判断商品是否支持配送
+
 
     //购物车-Cache-DB 缓存一致性设计
 

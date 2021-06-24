@@ -31,7 +31,7 @@
 
     <modules>
         <module>shop-common</module>
-        <module>redis-cluster-client</module>
+        <module>shop-redis</module>
         <module>shop-product</module>
         <module>shop-wms</module>
         <module>shop-cart</module>

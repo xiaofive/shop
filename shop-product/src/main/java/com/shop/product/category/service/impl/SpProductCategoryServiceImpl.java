@@ -74,9 +74,9 @@ public class SpProductCategoryServiceImpl extends ServiceImpl<SpProductCategoryM
     @Override
     public IPage<SpProductCategoryVO> page(Long current, Long size, Long parentId) {
         Page<SpProductCategory> page = new Page<>(current, size);
-        UpdateWrapper<SpProductCategory> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("parent_id", parentId);
-        IPage<SpProductCategory> spProductCategoryIPage = spProductCategoryMapper.selectPage(page, updateWrapper);
+        QueryWrapper<SpProductCategory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", parentId);
+        IPage<SpProductCategory> spProductCategoryIPage = spProductCategoryMapper.selectPage(page, queryWrapper);
         return spProductCategoryIPage.convert(b -> BeanConvertUtils.map(b, SpProductCategoryVO.class));
     }
 
