@@ -2,6 +2,7 @@ package com.shop.activity.activity.bean.entity;
 
 import com.shop.common.bean.base.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * Author: wang Y
  * Date: 2021-06-24
  */
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Data
 public class SpActivity extends BaseEntity {

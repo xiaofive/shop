@@ -134,7 +134,7 @@ public class ProductCategoryRest {
     @GetMapping(value = "/list")
     public IPage<SpProductCategoryVO> page(@RequestParam(value = "current", defaultValue = "1") Long current,
                                            @RequestParam(value = "size", defaultValue = "15") Long size,
-                                           @RequestParam("parentId") Long parentId) {
+                                           @RequestParam(value = "parentId", defaultValue = "0") Long parentId) {
         if (parentId < 0) {
             throw new RuntimeException("parentId 不合法");
         }
