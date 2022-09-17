@@ -1,0 +1,23 @@
+#spring:
+#  application:
+#    name: shop-rabbitmq-client
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${REGISTER_HOST:1.116.205.169}:${REGISTER_PORT:8848}
+#        namespace: shop-rabbitmq-client-local
+#
+#      config:
+#        server-addr: ${REGISTER_HOST:1.116.205.169}:${REGISTER_PORT:8848}
+#        namespace: shop-rabbitmq-client-local
+#        file-extension: yml
+#        group: SHOP
+#
+
+spring:
+  rabbitmq:
+    host: 116.205.184.121
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: shop-mq

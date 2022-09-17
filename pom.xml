@@ -32,6 +32,7 @@
     <modules>
         <module>shop-common</module>
         <module>redis-cluster-client</module>
+        <module>shop-rabbitmq</module>
         <module>shop-product</module>
         <module>shop-gateway</module>
     </modules>

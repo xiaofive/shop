@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: shop-rabbitmq-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-rabbitmq-client-staging
+
+      config:
+        server-addr: ${REGISTER_HOST:127.0.0.1}:${REGISTER_PORT:8848}
+        namespace: shop-rabbitmq-client-staging
+        file-extension: yml
+        group: SHOP
