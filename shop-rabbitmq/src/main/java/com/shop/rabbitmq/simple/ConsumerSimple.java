@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 
 /**
  * 1：简单模式 - 消费者
+ * 一对一
+ * 生产者是消费者是一一对应，也叫做点对点模式
+ * 生产者和消费者在发送和接收消息时，只需要指定队列名称，而不需要指定Exchange交换机
  * Author: wang Y
  * Date: 2022-08-28
  */

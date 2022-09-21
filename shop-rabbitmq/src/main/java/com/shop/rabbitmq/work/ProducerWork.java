@@ -1,4 +1,4 @@
-package com.shop.rabbitmq.simple;
+package com.shop.rabbitmq.work;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * 1：简单模式 - 生产者
+ * 2：工作模式 - 生产者
  * Author: wang Y
- * Date: 2022-08-28
+ * Date: 2022-09-21
  */
 @Component
-public class ProducerSimple {
+public class ProducerWork {
 
     @Resource
     private RabbitTemplate rabbitTemplate;
@@ -26,7 +26,7 @@ public class ProducerSimple {
      */
     public void producerOne(Integer num) {
         for (int i = 0; i < num; i++) {
-            rabbitTemplate.convertAndSend("shop.simple.queue1","这是：1：简单模式 - 生产者，发送的第" + (i+1) + "条消息！");
+            rabbitTemplate.convertAndSend("shop.work.queue","这是：2：工作模式 - 生产者，发送的第" + (i+1) + "条消息！");
         }
     }
 
