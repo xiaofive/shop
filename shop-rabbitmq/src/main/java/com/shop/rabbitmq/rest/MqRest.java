@@ -1,6 +1,7 @@
 package com.shop.rabbitmq.rest;
 
 import com.shop.rabbitmq.fanout.ProducerFanout;
+import com.shop.rabbitmq.route.ProducerRoute;
 import com.shop.rabbitmq.simple.ProducerSimple;
 import com.shop.rabbitmq.work.ProducerWork;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,8 @@ public class MqRest {
     private ProducerWork producerWork;
     @Resource
     private ProducerFanout producerFanout;
+    @Resource
+    private ProducerRoute producerRoute;
 
     /**
      * 1：简单模式 - 发送消息测试
@@ -51,7 +54,7 @@ public class MqRest {
      *
      * @Param:
      * @return: void
-     * @Date: 2022-08-28
+     * @Date: 2022-09-22
      */
     @GetMapping("workTest")
     public void workTest(@RequestParam(name = "num") Integer num) {
@@ -63,11 +66,24 @@ public class MqRest {
      *
      * @Param:
      * @return: void
-     * @Date: 2022-08-28
+     * @Date: 2022-09-23
      */
     @GetMapping("fanoutTest")
     public void fanoutTest(@RequestParam(name = "num") Integer num) {
         producerFanout.producerOne(num);
     }
+
+    /**
+     * 4：路由模式 - 发送消息测试
+     *
+     * @Param:
+     * @return: void
+     * @Date: 2022-09-24
+     */
+    @GetMapping("routeTest")
+    public void routeTest(@RequestParam(name = "num") Integer num) {
+        producerRoute.producerOne(num);
+    }
+
 
 }
