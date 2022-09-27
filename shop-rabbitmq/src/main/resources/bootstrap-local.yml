@@ -26,3 +26,8 @@ spring:
     #采用confirm以及return机制 发送返回监听回调
     publisher-confirm-type: correlated
     publisher-returns: true
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual

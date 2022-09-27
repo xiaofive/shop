@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 5：主题模式 - 消费者
+ *
+ * TODO 消息确认机制：消费者在绑定队列时 可以指定 【AutoAck】 参数
  * <p>
  * Author: wang Y
  * Date: 2022-09-24
