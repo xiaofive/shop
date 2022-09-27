@@ -64,6 +64,9 @@ public class RabbitMqConfig {
     @Bean
     public RabbitAdmin rabbitAdmin(RabbitTemplate rabbitTemplate) {
         RabbitAdmin rabbitAdmin = new RabbitAdmin(rabbitTemplate);
+        /*
+         *  autoStartup 必须要设为 true ，否则Spring容器不会加载RabbitAdmin类
+         */
         rabbitAdmin.setAutoStartup(true);
         return rabbitAdmin;
     }

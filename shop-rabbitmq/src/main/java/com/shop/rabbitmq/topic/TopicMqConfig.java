@@ -27,11 +27,22 @@ public class TopicMqConfig {
 
     @Bean
     public TopicExchange topicExchange() {
+        /**
+         *  String name, boolean durable, boolean autoDelete
+         *  public AbstractExchange(String name) {
+         *         this(name, true, false);
+         *  }
+         *  交换机默认构造 duable = true ：持久化
+         */
         return new TopicExchange("shop.topic.exchange");
     }
 
     @Bean
     public Queue topicOneQueue() {
+        //默认构造为持久化队列
+        //String name, boolean durable, boolean exclusive, boolean autoDelete
+        //this(name, true, false, false);
+        //durable = true ：队列持久化
         return new Queue("shop.topic.queue1");
     }
 
