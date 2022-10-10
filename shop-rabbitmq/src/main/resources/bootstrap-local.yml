@@ -15,8 +15,15 @@
 #
 
 spring:
+  datasource:
+    master:
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://120.46.184.82:3306/rabbitmq?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+     username: root
+     password: root
+
   rabbitmq:
-    host: 116.205.184.121
+    host: 120.46.184.82
     port: 5672
     username: admin
     password: admin
@@ -27,7 +34,13 @@ spring:
     publisher-confirm-type: correlated
     publisher-returns: true
     listener:
+      ####开启手动ack
       direct:
         acknowledge-mode: manual
       simple:
         acknowledge-mode: manual
+
+#打印SQL语句
+#mybatis-plus:
+#  configuration:
+#    log-impl: com.shop.rabbitmq.log.service.impl.RabbitMQLogServiceImpl

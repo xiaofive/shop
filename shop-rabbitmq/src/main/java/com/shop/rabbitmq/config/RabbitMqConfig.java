@@ -1,14 +1,11 @@
 package com.shop.rabbitmq.config;
 
+import com.shop.rabbitmq.log.bean.SendStatusEnum;
+import com.shop.rabbitmq.log.bean.entity.RabbitMQLog;
+import com.shop.rabbitmq.log.service.RabbitMQLogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.core.Correlation;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessagePostProcessor;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @AllArgsConstructor
 public class RabbitMqConfig {
     private final ConnectionFactory connectionFactory;
-    //private final RabbitLogsMapper rabbitLogsMapper;
+    private final RabbitMQLogService rabbitMQLogService;
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
@@ -36,16 +33,16 @@ public class RabbitMqConfig {
                 //发送成功
                 log.info("消息成功发送 , msgId: {},", msgId);
                 //状态更新  消息发送成功A
-//                BiddingRabbitLogs biddingRabbitLogs = new BiddingRabbitLogs();
-//                biddingRabbitLogs.setStatus(SendStatus.SEND_SUCCESS.getValue());
-//                rabbitLogsMapper.update(biddingRabbitLogs, Wrappers.lambdaUpdate(BiddingRabbitLogs.class).eq(BiddingRabbitLogs::getId,msgId).notIn(BiddingRabbitLogs::getStatus,"4"));
+                RabbitMQLog rabbitMQLog = new RabbitMQLog();
+                rabbitMQLog.setStatus(SendStatusEnum.SEND_SUCCESS.getStatus());
+                rabbitMQLogService.updateByMsgId(msgId);
             } else {
                 //发送失败
                 log.error("消息发送失败, {}, cause: {}, msgId: {}", correlationData, cause, msgId);
                 //状态更新  消息发送失败
-//                BiddingRabbitLogs biddingRabbitLogs = new BiddingRabbitLogs();
-//                biddingRabbitLogs.setStatus(SendStatus.SEND_FAILD.getValue());
-//                rabbitLogsMapper.update(biddingRabbitLogs, Wrappers.lambdaUpdate(BiddingRabbitLogs.class).eq(BiddingRabbitLogs::getId,msgId).notIn(BiddingRabbitLogs::getStatus,"4"));
+                RabbitMQLog rabbitMQLog = new RabbitMQLog();
+                rabbitMQLog.setStatus(SendStatusEnum.SEND_FAIL.getStatus());
+                rabbitMQLogService.updateByMsgId(msgId);
             }
         });
         rabbitTemplate.setMandatory(true);
@@ -54,9 +51,9 @@ public class RabbitMqConfig {
             log.error("消息从Exchange路由到Queue失败: exchange: {}, route: {}, replyCode: {}, replyText: {}, message: {}", exchange, routingKey, replyCode, replyText, message);
             //状态更新 消息发送失败
             String msgId = (String) message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
-//            BiddingRabbitLogs biddingRabbitLogs = new BiddingRabbitLogs();
-//            biddingRabbitLogs.setStatus(SendStatus.SEND_FAILD.getValue());
-//            rabbitLogsMapper.update(biddingRabbitLogs, Wrappers.lambdaUpdate(BiddingRabbitLogs.class).eq(BiddingRabbitLogs::getId, msgId).notIn(BiddingRabbitLogs::getStatus, "4"));
+            RabbitMQLog rabbitMQLog = new RabbitMQLog();
+            rabbitMQLog.setStatus(SendStatusEnum.SEND_FAIL.getStatus());
+            rabbitMQLogService.updateByMsgId(msgId);
         });
         return rabbitTemplate;
     }
